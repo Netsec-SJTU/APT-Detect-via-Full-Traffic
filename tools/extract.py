@@ -8,6 +8,7 @@ import os
 import sys
 import time
 import shutil
+import yara
 import subprocess
 
 import magic
@@ -16,6 +17,8 @@ import magic
 def analyze(target):
     os.system("yara -w /home/ubuntu/yara/rules/index.yar %s" % target)
 
+def compileyara():
+    rules = yara.compile("/home/ubuntu/yara/rules/index.yar")
 
 def bro(target):
     cmd = "bro -r %s /home/ubuntu/bro/scripts/policy/frameworks/files/extract-all-files.bro"
