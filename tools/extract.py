@@ -8,7 +8,6 @@ import os
 import sys
 import time
 import shutil
-import yara
 import subprocess
 
 import magic
@@ -17,8 +16,6 @@ import magic
 def analyze(target):
     os.system("yara -w /home/ubuntu/yara/rules/index.yar %s" % target)
 
-def compileyara():
-    rules = yara.compile("/home/ubuntu/yara/rules/index.yar")
 
 def bro(target):
     cmd = "bro -r %s /home/ubuntu/bro/scripts/policy/frameworks/files/extract-all-files.bro"
@@ -122,6 +119,7 @@ def printHelp():
 def rmdir(dir):
     if os.path.exists(dir):
         shutil.rmtree(dir)
+
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
