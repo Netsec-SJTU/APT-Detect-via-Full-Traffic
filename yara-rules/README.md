@@ -42,6 +42,7 @@ rule identifier : APT
         $domain = "" nocase wide
         $hash = ""
         $file = "" nocase wide
+        $process = "" nocase wide
         $reg = "" nocase wide
         $service = "" nocase wide
     condition:
@@ -49,3 +50,5 @@ rule identifier : APT
         any of them
 }
 ```
+
+next sig30
