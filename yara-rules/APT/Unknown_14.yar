@@ -1,4 +1,4 @@
-wrule Unknown_14 : APT
+rule Unknown_14 : APT
 {
     strings:
         $file1 = "SYSTEMROOT\\temp\\temp56273.pdf" nocase wide

@@ -5,8 +5,8 @@ rule Unknown_7 : APT
         ref2 = "https://www.wired.com/2012/10/miniflame-espionage-tool/"
     strings:
         $file1 = "SYSPATH\\icsvnt32.dll" nocase wide
-        $reg = "system\\currentcontrolset\\control\\timezoneinformation\\standarddatebias" nocase wide
-        $reg = "system\\currentcontrolset\\control\\timezoneinformation\\standardtimebias" nocase wide
+        $reg1 = "system\\currentcontrolset\\control\\timezoneinformation\\standarddatebias" nocase wide
+        $reg2 = "system\\currentcontrolset\\control\\timezoneinformation\\standardtimebias" nocase wide
         $dirver = "icsvnt32.sys" nocase wide
     condition:
         all of them

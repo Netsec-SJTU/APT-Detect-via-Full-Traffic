@@ -1,4 +1,4 @@
-rule Unknown_18 : APT
+rule Unknown_19 : APT
 {
     strings:
         $file1 = "SYSPATH\\ieloader.dll" nocase wide

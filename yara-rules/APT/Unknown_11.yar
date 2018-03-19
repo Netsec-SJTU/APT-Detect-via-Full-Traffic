@@ -6,7 +6,6 @@ rule Unknown_11 : APT
         $dirver1 = "rpclog.sys" nocase wide
         $dirver2 = "winext32.sys" nocase wide
         $dirver3 = "winip.sys" nocase wide
-        $domain = "" nocase wide
         $file1 = "SYSPATH\\taskbar.exe" nocase wide
         $file2 = "SYSPATH\\MsgQueue.exe" nocase wide
         $file3 = "SYSPATH\\SndTray.exe" nocase wide
@@ -23,10 +22,10 @@ rule Unknown_11 : APT
         $process2 = "MsgQueue.exe" nocase wide
         $process3 = "SndTray.exe" nocase wide
         $process4 = "msserv.exe" nocase wide
-        $reg = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\\newval" nocase wide
-        $reg = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\\WindowsFirewallSecurityServ" nocase wide
-        $reg = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\\slidebar" nocase wide
-        $reg = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\\MSDeviceDriver" nocase wide
+        $reg1 = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\\newval" nocase wide
+        $reg2 = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\\WindowsFirewallSecurityServ" nocase wide
+        $reg3 = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\\slidebar" nocase wide
+        $reg4 = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\\MSDeviceDriver" nocase wide
         $service = "Recover" nocase wide
     condition:
         4 of them

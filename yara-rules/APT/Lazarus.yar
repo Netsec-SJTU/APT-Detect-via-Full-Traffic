@@ -1,6 +1,5 @@
 rule Lazarus : APT
 {
-    meta:
     strings:
         $file1 = "SYSTEMROOT\\qtlib.sqt" nocase wide
         $file2 = "SYSTEMROOT\\zl4vq.sqt" nocase wide
