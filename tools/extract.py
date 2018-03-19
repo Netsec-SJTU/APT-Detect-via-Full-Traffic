@@ -13,8 +13,8 @@ import subprocess
 import magic
 
 
-def analyze(target):
-    os.system("yara -w /home/ubuntu/yara/rules/index.yar %s" % target)
+def yara(target, rulepath="/home/ubuntu/yara/rules/index.yar"):
+    os.system("yara -w %s %s" % (target))
 
 
 def bro(target):
@@ -141,3 +141,5 @@ if __name__ == '__main__':
         bro(sys.argv[2])
     elif sys.argv[1] == "log":
         logmimes()
+    elif sys.argv[1] == "yara":
+        yara(sys.argv[2])
