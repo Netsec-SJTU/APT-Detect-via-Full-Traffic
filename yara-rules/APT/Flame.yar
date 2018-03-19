@@ -4,5 +4,6 @@ rule Flame : APT
         $file1 = "SYSPATH\\indsvc32.ocx" nocase wide
         $file2 = "SYSTEMROOT\\temp\\indsvc32.ocx " nocase wide
     condition:
-        all of them
+        any of them
+        //all of them
 }

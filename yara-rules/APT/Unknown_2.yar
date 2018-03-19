@@ -11,5 +11,6 @@ rule Unknown_2 : APT
         $file4 = "\\.\\IdeDrive2" nocase wide
         $dirver1 = "fdisk.sys" nocase wide
     condition:
-        all of them
+        any of them
+        //all of them
 }

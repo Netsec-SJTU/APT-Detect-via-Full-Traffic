@@ -10,5 +10,6 @@ rule Unknown_18 : APT
         // $file1 = "SYSTEMROOT\\..\\ Documents and Settings\\*\\LocalSettings\\Application Data\\S-1-5-31-1286970278978-5713669491-166975984-320" nocase wide
         $file1 = "LocalSettings\\Application Data\\S-1-5-31-1286970278978-5713669491-166975984-320" nocase wide
     condition:
-        all of them
+        any of them
+        //all of them
 }

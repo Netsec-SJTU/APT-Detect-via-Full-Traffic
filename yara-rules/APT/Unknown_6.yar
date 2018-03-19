@@ -8,5 +8,6 @@ rule Unknown_6 : APT
         $file2 = "SYSTEMROOT\\..\\Program Files\\common files\\microsoft shared\\mssecuritymgr" nocase wide
         $file3 = "SYSTEMROOT\\..\\Program Files\\common files\\micfosoft shared\\MSAPackages" nocase wide
     condition:
-        all of them
+        any of them
+        //all of them
 }

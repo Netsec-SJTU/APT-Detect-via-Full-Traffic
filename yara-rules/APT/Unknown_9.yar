@@ -8,5 +8,6 @@ rule Unknown_9 : APT
         $reg = "Software\\Microsoft\\MSFix" nocase wide
         $dirver = "w3ssl.sys" nocase wide
     condition:
-        all of them
+        any of them
+        //all of them
 }

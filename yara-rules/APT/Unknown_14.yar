@@ -5,5 +5,6 @@ rule Unknown_14 : APT
         // $file2 = "SYSTEMROOT\\..\\Documents and Settings\\*\\Local Settings\\History\\cache\\iecache.dll" nocase wide
         $file2 = "Local Settings\\History\\cache\\iecache.dll" nocase wide
     condition:
-        all of them
+        any of them
+        //all of them
 }

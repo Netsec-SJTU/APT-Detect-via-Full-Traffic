@@ -7,6 +7,7 @@ rule Agent_BTZ : APT
     strings:
         $reg1 = "software\\microsoft\\windows\\currentversion\\StrtdCfg" nocase wide
     condition:
-        all of them
+        any of them
+        //all of them
 }
 

@@ -12,5 +12,6 @@ rule Unknown_8 : APT
         $file5 = "SYSPATH\\msvcp11.dll" nocase wide
         $file6 = "SYSPATH\\msxml10.dll" nocase wide
     condition:
-        all of them
+        any of them
+        //all of them
 }

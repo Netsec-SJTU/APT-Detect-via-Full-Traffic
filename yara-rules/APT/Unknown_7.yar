@@ -9,5 +9,6 @@ rule Unknown_7 : APT
         $reg2 = "system\\currentcontrolset\\control\\timezoneinformation\\standardtimebias" nocase wide
         $dirver = "icsvnt32.sys" nocase wide
     condition:
-        all of them
+        any of them
+        //all of them
 }

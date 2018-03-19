@@ -7,5 +7,6 @@ rule Unknown_15 : APT
     strings:
         $reg = "software\\microsoft\\NetWin" nocase wide
     condition:
-        all of them
+        any of them
+        //all of them
 }

@@ -22,5 +22,6 @@ rule Moonflower : APT
         $dirver6 = "triedit.sys" nocase wide
         $dirver7 = "vgx.sys" nocase wide
     condition:
-        5 of them
+        any of them
+        //5 of them
 }

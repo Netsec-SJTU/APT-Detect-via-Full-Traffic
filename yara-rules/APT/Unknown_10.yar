@@ -12,5 +12,6 @@ rule Unknown_10 : APT
         $file7 = "SYSTEMROOT\\winstat.pdr" nocase wide
         $service = "WOWmanager" nocase wide
     condition:
-        all of them
+        any of them
+        //all of them
 }

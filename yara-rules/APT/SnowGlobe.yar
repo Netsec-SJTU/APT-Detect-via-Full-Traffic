@@ -17,5 +17,6 @@ rule SnowGlobe : APT
         $service1 = "WinMI32" nocase wide
         $reg = "Software\\Microsoft\\WinMI" nocase wide
     condition:
-        5 of them
+        any of them
+        //5 of them
 }

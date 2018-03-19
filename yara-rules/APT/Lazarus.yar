@@ -6,5 +6,6 @@ rule Lazarus : APT
         $file3 = "SYSTEMROOT\\dfrgntfs5.sqt" nocase wide
         $file4 = "SYSTEMROOT\\msvcrt58.sqt" nocase wide
     condition:
-        all of them
+        any of them
+        //all of them
 }

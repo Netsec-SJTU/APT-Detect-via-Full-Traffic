@@ -5,5 +5,6 @@ rule Unknown_19 : APT
         $file2 = "SYSPATH\\orepst.dll" nocase wide
         $file3 = "SYSPATH\\pstore.dll" nocase wide
     condition:
-        all of them
+        any of them
+        //all of them
 }

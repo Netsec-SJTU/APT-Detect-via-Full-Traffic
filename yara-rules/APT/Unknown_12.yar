@@ -8,5 +8,6 @@ rule Unknown_12 : APT
         $reg = "Software\\Postman" nocase wide
         $service = "TlbControl" nocase wide
     condition:
-        all of them
+        any of them
+        //all of them
 }

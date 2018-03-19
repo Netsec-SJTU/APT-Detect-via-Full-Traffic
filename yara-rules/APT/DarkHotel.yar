@@ -129,5 +129,6 @@ rule DarkHotel : APT
         $driver23 = "xmlhelp.sys" nocase wide
         $driver24 = "xsocket.sys" nocase wide
     condition:
-        5 of them
+        any of them
+        //5 of them
 }

@@ -9,5 +9,6 @@ rule Unknown_4 : APT
         $file1 = "SYSPATH\\ipmontr.exe" nocase wide
         $file2 = "SYSPATH\\ipconfhlp.dll" nocase wide
     condition:
-        all of them
+        any of them
+        //all of them
 }

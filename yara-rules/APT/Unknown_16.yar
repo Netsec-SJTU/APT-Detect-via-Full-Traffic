@@ -6,5 +6,6 @@ rule Unknown_16 : APT
         $driver1 = "adap64info.sys" nocase wide
         $driver2 = "mfc64comm.sys" nocase wide
     condition:
-        all of them
+        any of them
+        //all of them
 }

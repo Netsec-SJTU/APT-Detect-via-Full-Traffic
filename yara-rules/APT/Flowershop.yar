@@ -39,6 +39,7 @@ rule Flowershop : APT
         $dirver2 = "ndisio32.sys" nocase wide
         $dirver3 = "paravdm.sys" nocase wide
     condition:
-        5 of them
+        any of them
+        //5 of them
 }
 

@@ -12,5 +12,6 @@ rule Hydraq : APT
         $reg2 = "Software\\Sun\\1.1.2\\IsoTp" nocase wide
         $driver = "acelpvc.sys" nocase wide
     condition:
-        all of them
+        any of them
+        //all of them
 }

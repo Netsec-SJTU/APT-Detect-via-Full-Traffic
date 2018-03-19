@@ -6,5 +6,6 @@ rule Unknown_1 : APT
     strings:
         $directory1 = "SYSPATH\\driver32\\ldf" nocase wide
     condition:
-        all of them
+        any of them
+        //all of them
 }

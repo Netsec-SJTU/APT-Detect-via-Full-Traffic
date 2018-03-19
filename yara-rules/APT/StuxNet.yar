@@ -11,5 +11,6 @@ rule StuxNet : APT
         $dirver5 = "jmidebs.sys" nocase wide
         $directory = "_LPDIR_LOGS\\Get_Files" nocase wide
     condition:
-        all of them
+        any of them
+        //all of them
 }

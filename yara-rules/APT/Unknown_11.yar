@@ -28,5 +28,6 @@ rule Unknown_11 : APT
         $reg4 = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\\MSDeviceDriver" nocase wide
         $service = "Recover" nocase wide
     condition:
-        4 of them
+        any of them
+        //4 of them
 }

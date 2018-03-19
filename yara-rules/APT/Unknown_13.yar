@@ -6,5 +6,6 @@ rule Unknown_13 : APT
         $file1 = "SYSPATH\\nsecm.dll" nocase wide
         $driver = "nsecm.sys " nocase wide
     condition:
-        all of them
+        any of them
+        //all of them
 }

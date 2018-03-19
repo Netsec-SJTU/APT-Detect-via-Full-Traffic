@@ -11,5 +11,6 @@ rule Unknown_5 : APT
         $file2 = "SYSPATH\\sbool\\msadp32.exe" nocase wide
         $file3 = "SYSPATH\\Internat.dll" nocase wide
     condition:
-        all of them
+        any of them
+        //all of them
 }

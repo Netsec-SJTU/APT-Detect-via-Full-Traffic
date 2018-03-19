@@ -7,5 +7,6 @@ rule Unknown_17 : APT
         $file3 = "Local Settings\\Temp\\Acrobat.dll" nocase wide
         $file4 = "Local Settings\\Temp\\first.tmp" nocase wide
     condition:
-        all of them
+        any of them
+        //all of them
 }
