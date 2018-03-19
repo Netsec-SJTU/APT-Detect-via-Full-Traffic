@@ -13,7 +13,9 @@ cd yara
 make
 sudo make install
 
+sudo pip install --upgrade pip
 sudo pip install -U scikit-learn numpy scipy matplotlib
+sudo pip install -U magic
 sudo pip3 install --user numpy scipy
 sudo pip3 install -U scikit-learn matplotlib
 

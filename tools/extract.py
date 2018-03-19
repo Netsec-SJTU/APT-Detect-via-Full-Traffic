@@ -14,7 +14,12 @@ import magic
 
 
 def yara(target, rulepath="/home/ubuntu/yara/rules/index.yar"):
-    os.system("yara -w %s %s" % (target))
+    if not os.path.isdir(target):
+        os.system("yara -w %s %s" % (rulepath, target))
+    for i in os.listdir(target):
+        filepath = os.path.join(target, i)
+        print("test %s" % filepath)
+        os.system("yara -w %s %s" % (rulepath, filepath))
 
 
 def bro(target):
@@ -142,4 +147,7 @@ if __name__ == '__main__':
     elif sys.argv[1] == "log":
         logmimes()
     elif sys.argv[1] == "yara":
-        yara(sys.argv[2])
+        if len(sys.argv) > 3:
+            yara(sys.argv[2], sys.argv[3])
+        else:
+            yara(sys.argv[2])
