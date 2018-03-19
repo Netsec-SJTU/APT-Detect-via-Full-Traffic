@@ -7,8 +7,8 @@ rule Unknown_18 : APT
         ref4 = "https://www.mcafee.com/threat-intelligence/malware/default.aspx?id=253485"
         ref5 = "https://www.trendmicro.com/vinfo/us/threat-encyclopedia/malware/troj_cmse.a"
     strings:
-        // $file1 = "SYSTEMROOT\..\ Documents and Settings\*\LocalSettings\Application Data\S-1-5-31-1286970278978-5713669491-166975984-320" nocase wide
-        $file1 = "LocalSettings\Application Data\S-1-5-31-1286970278978-5713669491-166975984-320" nocase wide
+        // $file1 = "SYSTEMROOT\\..\\ Documents and Settings\\*\\LocalSettings\\Application Data\\S-1-5-31-1286970278978-5713669491-166975984-320" nocase wide
+        $file1 = "LocalSettings\\Application Data\\S-1-5-31-1286970278978-5713669491-166975984-320" nocase wide
     condition:
         all of them
 }

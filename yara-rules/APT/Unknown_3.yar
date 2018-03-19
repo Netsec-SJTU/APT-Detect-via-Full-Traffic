@@ -5,7 +5,7 @@ rule Unknown_3 : APT
     strings:
         $service1 = "systmgmt" nocase wide
         $dirver1 = "syswpsvc.sys" nocase wide
-        $reg1 = "system\currentcontrolset\services\systmgmt\Parameters\ServiceDll" nocase wide
+        $reg1 = "system\\currentcontrolset\\services\\systmgmt\\Parameters\\ServiceDll" nocase wide
     condition:
         all of them
 }

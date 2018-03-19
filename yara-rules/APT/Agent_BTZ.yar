@@ -5,7 +5,7 @@ rule Agent_BTZ : APT
         ref2 = "https://www.wired.com/2008/11/army-bans-usb-d/"
         ref3 = "http://blog.threatexpert.com/2008/11/agentbtz-threat-that-hit-pentagon.html"
     strings:
-        $reg1 = "software\microsoft\windows\currentversion\StrtdCfg" nocase wide
+        $reg1 = "software\\microsoft\\windows\\currentversion\\StrtdCfg" nocase wide
     condition:
         all of them
 }

@@ -5,7 +5,7 @@ rule Unknown_15 : APT
         ref2 = "http://www.crysys.hu/turlaepiccc/turla_epic_cc_v1.pdf"
         ref3 = "https://securelist.com/analysis/publications/65545/the-epic-turla-operation/"
     strings:
-        $reg = "software\microsoft\NetWin" nocase wide
+        $reg = "software\\microsoft\\NetWin" nocase wide
     condition:
         all of them
 }

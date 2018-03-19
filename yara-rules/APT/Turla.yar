@@ -5,7 +5,7 @@ rule Turla : APT
         ref2 = "https://virustotal.com/hu/file/71eb7c15a026d011cca82fed8b634c10b569bb6b0cda1af53228
 7218b9ee110f/analysis"
     strings:
-        $reg1 = "System\CurrentControlSet\Control\CrashImage" nocase wide
+        $reg1 = "System\\CurrentControlSet\\Control\\CrashImage" nocase wide
         $driver1 = "atmarpd.sys"  nocase wide
         $domain1 = "pressbrig1.tripod.com" nocase wide        
         $domain2 = "www.scifi.pages.at" nocase wide

@@ -5,11 +5,11 @@ rule Unknown_5 : APT
         ref2 = "https://www.symantec.com/security_response/writeup.jsp?docid=2003-040713-2623-99&tabid=2"
         ref3 = ""
     strings:
-        $reg1 = "Software\Microsoft\Windows\CurrentVersion\policies\Explorer\Run\Internet32" nocase wide
+        $reg1 = "Software\\Microsoft\\Windows\\CurrentVersion\\policies\\Explorer\\Run\\Internet32" nocase wide
         $dirver1 = "internat.sys" nocase wide
-        $file1 = "SYSPATH\internat32.exe" nocase wide
-        $file2 = "SYSPATH\sbool\msadp32.exe" nocase wide
-        $file3 = "SYSPATH\Internat.dll" nocase wide
+        $file1 = "SYSPATH\\internat32.exe" nocase wide
+        $file2 = "SYSPATH\\sbool\\msadp32.exe" nocase wide
+        $file3 = "SYSPATH\\Internat.dll" nocase wide
     condition:
         all of them
 }
