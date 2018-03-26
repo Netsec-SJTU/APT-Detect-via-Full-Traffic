@@ -2,6 +2,20 @@ sudo apt update && sudo apt upgrade
 
 sudo apt install -y git python-pip python3-pip
 sudo apt install -y htop
+sudo pip install -U pip setuptools
+
+# cuckoo
+sudo apt-get install python python-pip python-dev libffi-dev libssl-dev
+sudo apt-get install python-virtualenv python-setuptools
+sudo apt-get install libjpeg-dev zlib1g-dev swig
+sudo apt-get install tcpdump apparmor-utils
+sudo apt-get install swig
+sudo aa-disable /usr/sbin/tcpdump
+
+virtualenv venv
+. venv/bin/activate
+pip install -U pip setuptools
+pip install -U cuckoo
 
 # yara
 sudo apt install -y automake libtool make gcc
