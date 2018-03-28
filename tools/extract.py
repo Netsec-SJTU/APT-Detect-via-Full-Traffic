@@ -128,10 +128,20 @@ def rmdir(dir):
 def tcpflow(file):
     os.system("tcpflow -r %s -e http -o output" % file)
     for i in os.listdir("output"):
-        if "HTTPBODY" not in i:
+        # if "HTTPBODY" not in i:
+        if "HTTPBODY" in i:
+            # os.move(os.path.join('output', i), os.path.join('httpbody', i))
             os.remove(os.path.join('output', i))
-    os.system("rm -rf ./output/!(*HTTPBODY*)")
+    # os.system("rm -rf ./output/!(*HTTPBODY*)")
 
+def tcpflowfile():
+    for i in os.listdir("output"):
+        with open(os.path.join('output', i), "r") as fh:
+            cnt = fh.read()
+            if "HTTP" in cnt:
+                print i
+                print cnt
+                raw_input("c?")
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
