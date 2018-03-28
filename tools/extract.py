@@ -125,6 +125,13 @@ def rmdir(dir):
     if os.path.exists(dir):
         shutil.rmtree(dir)
 
+def tcpflow(file):
+    os.system("tcpflow -r %s -e http -o output" % file)
+    for i in os.listdir("output"):
+        if "HTTPBODY" not in i:
+            os.remove(os.path.join('output', i))
+    os.system("rm -rf ./output/!(*HTTPBODY*)")
+
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
