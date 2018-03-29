@@ -2,11 +2,9 @@
 # -*- coding: utf-8 -*-
 
 import socket
-
-
 import urlparse
-
-# py3 from urllib import parse as urlparse
+# py3
+# from urllib import parse as urlparse
 
 CRLF, COLON, SP = b'\r\n', b':', b' '
 
@@ -67,10 +65,12 @@ class HttpParser(object):
     """HTTP request/response parser.
     """
 
-    def __init__(self, type=None):
+    def __init__(self, ptype=None):
+        self.refresh(ptype)
 
+    def refresh(self, ptype=None):
         self.state = HTTP_PARSER_STATE_INITIALIZED
-        self.type = type if type else HTTP_REQUEST_PARSER
+        self.type = ptype if ptype else HTTP_REQUEST_PARSER
 
         self.raw = b''
         self.buffer = b''
@@ -118,7 +118,7 @@ class HttpParser(object):
 
             return False, b''
 
-        line, data = HttpParser.split(data)
+        line, data = self.split(data)
         # print line, data
         if line == False:
             return line, data

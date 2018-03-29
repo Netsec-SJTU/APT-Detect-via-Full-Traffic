@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import os
+import pickle
 from sklearn import metrics
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
@@ -25,9 +26,38 @@ def loadFile(name):
     return list(map(unquote, set(data)))
 
 
+def save(val, identifier):
+    """
+    save variable into a file
+    :param val: the val you want to save
+    :param identifier: str. the identifier of variable
+    :return: bool. status of save
+    """
+    try:
+        output = open(identifier + '.pkl', 'wb')
+        pickle.dump(val, output)
+        output.close()
+        return True
+    except:
+        return False
+
+
+def load(identifier):
+    """
+    get variable from a file
+    :param identifier: str. the identifier of variable
+    :return: variable
+    """
+    pkl_file = open(identifier + '.pkl', 'rb')
+    data = pickle.load(pkl_file)
+    pkl_file.close()
+    return data
+
+
 def main():
     badQueries = loadFile('badqueries.txt')
     validQueries = loadFile('goodqueries.txt')
+    anotherQueries = loadFile("ctf.txt")
 
     queries = badQueries + validQueries
 
@@ -46,7 +76,9 @@ def main():
         sublinear_tf=True,
         ngram_range=(1, 3)
     )
-    X = vectorizer.fit_transform(queries)
+    X = vectorizer.fit_transform(queries + anotherQueries)
+    Z = X[len(y):]
+    X = X[:len(y)]
 
     # splitting data
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
@@ -61,6 +93,18 @@ def main():
 
     # Evaluation
     predicted = lgs.predict(X_test)
+    pZ = lgs.predict_proba(Z)
+    good = open("good.txt", "w")
+    bad = open("bad.txt", "w")
+
+    for i in range(len(pZ)):
+        if pZ[i] == 1:
+            bad.write(anotherQueries[i])
+        else:
+            good.write(anotherQueries[i])
+
+    good.close()
+    bad.close()
 
     fpr, tpr, _ = metrics.roc_curve(y_test, (lgs.predict_proba(X_test)[:, 1]))
     auc = metrics.auc(fpr, tpr)
