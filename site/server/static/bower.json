@@ -1,0 +1,18 @@
+{
+  "name": "aptd",
+  "homepage": "https://github.com/zoufutai/APT-Detect-via-Full-Traffic",
+  "authors": [
+    "lyle <lilyui@126.com>"
+  ],
+  "description": "APT Detect via Full Traffic",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "bower",
+    "test",
+    "tests"
+  ]
+}
