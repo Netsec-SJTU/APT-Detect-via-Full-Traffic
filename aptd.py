@@ -115,10 +115,11 @@ def choiceMime(mtype):
 
 
 def printHelp():
-    print "python extract.py log"
-    print "python extract.py clear"
-    print "python extract.py bro test.pcap"
-    print "python extract.py e image"
+    print "python aptd.py log"
+    print "python aptd.py clear"
+    print "python aptd.py bro test.pcap"
+    print "python aptd.py e image"
+    print "python aptd.py all test.pcap"
 
 
 def rmdir(dir):
@@ -168,3 +169,7 @@ if __name__ == '__main__':
             yara(sys.argv[2], sys.argv[3])
         else:
             yara(sys.argv[2])
+    elif sys.argv[1] == "all":
+        bro(sys.argv[2])
+        yara(sys.argv[2])
+        tcpflow(file)
