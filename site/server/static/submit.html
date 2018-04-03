@@ -1,0 +1,23 @@
+{% include templates\header.html %}
+<br><br><br><br><br><br>
+<div class="container">
+    <div id="logo" class="center">
+        <img src="{{ static_url('images/logo.png') }}" alt="">
+    </div>
+    <div id="intro">
+        <p>Detect APT via full traffic. Can analyze suspicious files and URLs to detect types of malware including viruses, worms, and trojans.</p>
+    </div>
+    <div class="submitform">
+        <form>
+            <div class="row">
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="FilePath / URL">
+                </div>
+                <div class="col">
+                    <button type="submit" class="btn btn-primary">Analyze</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% include templates\footer.html %}
