@@ -93,7 +93,7 @@ def main():
 
     # Evaluation
     predicted = lgs.predict(X_test)
-    pZ = lgs.predict_proba(Z)
+    pZ = lgs.predict(Z)
     good = open("good.txt", "w")
     bad = open("bad.txt", "w")
 
