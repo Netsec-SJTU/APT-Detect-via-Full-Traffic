@@ -12,8 +12,10 @@ import subprocess
 
 import magic
 
+from config import Config
 
-def yara(target, rulepath="/home/ubuntu/yara/rules/index.yar"):
+
+def yara(target, rulepath=Config.yaraRulePath):
     if not os.path.isdir(target):
         os.system("yara -w %s %s" % (rulepath, target))
     for i in os.listdir(target):
@@ -23,8 +25,7 @@ def yara(target, rulepath="/home/ubuntu/yara/rules/index.yar"):
 
 
 def bro(target):
-    cmd = "bro -r %s /home/ubuntu/bro/scripts/policy/frameworks/files/extract-all-files.bro"
-    os.system(cmd % target)
+    os.system("bro -r %s %s" % (target, Config.broScriptPath))
 
 
 def extract(mimes):
@@ -126,6 +127,7 @@ def rmdir(dir):
     if os.path.exists(dir):
         shutil.rmtree(dir)
 
+
 def tcpflow(file):
     os.system("tcpflow -r %s -e http -o output" % file)
     for i in os.listdir("output"):
@@ -135,6 +137,7 @@ def tcpflow(file):
             os.remove(os.path.join('output', i))
     # os.system("rm -rf ./output/!(*HTTPBODY*)")
 
+
 def tcpflowfile():
     for i in os.listdir("output"):
         with open(os.path.join('output', i), "r") as fh:
@@ -143,6 +146,7 @@ def tcpflowfile():
                 print i
                 print cnt
                 raw_input("c?")
+
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
@@ -172,4 +176,4 @@ if __name__ == '__main__':
     elif sys.argv[1] == "all":
         bro(sys.argv[2])
         yara(sys.argv[2])
-        tcpflow(file)
+        tcpflow(sys.argv[2])
