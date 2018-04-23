@@ -5,6 +5,7 @@ import re
 
 class IDS(object):
 
+    # learn from waf
     regexps = [
         r"\.\.",
         r"\:\$",

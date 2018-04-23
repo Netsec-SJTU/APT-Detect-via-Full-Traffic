@@ -174,6 +174,11 @@ if __name__ == '__main__':
         else:
             yara(sys.argv[2])
     elif sys.argv[1] == "all":
+        # sys.argv[2] => pcap file path
+        # extract file from traffic
         bro(sys.argv[2])
+        # use IoC detect file
         yara(sys.argv[2])
+        # split http flow
+        # http flow => rule
         tcpflow(sys.argv[2])
