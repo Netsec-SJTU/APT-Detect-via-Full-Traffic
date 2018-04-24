@@ -13,7 +13,6 @@ Abstract
 With the popularization of the Internet, the impact of the Internet on society has become greater and greater. The problem of network security has also become more and more prominent, and it has gradually become an urgent problem for the further development of the Internet and various network services and applications. This topic studies the APT attack detection technology based on full traffic, and implements APT attack detection through feature extraction and traffic analysis.
 
 Key words: APT, Attack Detection, Cyberspace Security
-
 µÚÒ»ÕÂ Ð÷ÂÛ
 
 1.1 ¿Î³ÌµÄÑÐ¾¿±³¾°¼°ÒâÒå
@@ -117,16 +116,32 @@ APT¹¥»÷×éÖ¯Ö®¼ä»¥Ïà··ÂôÂ©¶´¹¥»÷Âë¼°´îÅäµÄ¶ñÒâÈí¼þÔÚÍøÂçÖÐÔ½À´Ô½ÆÕ±é£¬Õâ±íÃ÷¸÷¹¥»
 
 µÚÈýÕÂ ¹¥»÷¼ì²â¼¼ÊõÔ­Àí
 
+// ºÃÏñËã²»ÉÏ¼¼Êõ£¿
+
 3.1 Á÷Á¿ÌáÈ¡¼¼Êõ
 
 3.1.1 HTTPÁ÷ÌáÈ¡
+
+ÎÒÃÇÊ¹ÓÃ
 
 3.1.2 ÎÄ¼þÌáÈ¡
 
 3.2 »ùÓÚÌØÕ÷Æ¥ÅäµÄ¼ì²â
 
 3.2.1 ¿ªÔ´waf
+
+´Ó¿ªÔ´µÄwaf[gitÉÏµÄwaf]ÖÐÌáÈ¡ÐÅÏ¢£¬
+
 3.2.2 ¹¥»÷¹¤¾ß
+
+Í¨¹ýMetasploitÖÐ£¬´ÓÍøÂçÊÕ¼¯µÄÂ©¶´Ö´ÐÐ¹¥»÷¸ºÔØµÄÁ÷Á¿ÄÜ½øÐÐÊ¶±ðÇÒ¶ÔÓ¦µÄÂ©¶´Ãû³Æ£¬¶ÔÒÑÖª¹¥»÷À´Ô´½øÐÐ±¨¾¯¡£
+
+Í¨¹ýGolismero¡¢Nikto¡¢Lynsis¡¢unix-privesc-check¡¢namp¡¢NessusµÈÉ¨Ãè¹¤¾ßÌ½²âÖ÷»úÐÅÏ¢½øÐÐÊ¶±ð²¢¼ÇÂ¼ÒÔÏÂÏà¹ØÌ½²âÐÅÏ¢£º¼ÆËã»ú·þÎñ¡¢¶Ë¿Ú¡¢²Ù×÷ÏµÍ³¡¢Èí¼þ°æ±¾µÈ¡£
+
+Í¨¹ýwebÉ¨Ãè¹¤¾ß£ºapache-users¡¢cutycapt¡¢DIRB¡¢dirbuster¡¢vega¡¢webslayer¡¢WVS½øÐÐwebÉ¨ÃèÊ±½øÐÐ¹Ø×¢²¢¼ÇÂ¼¡£
+
+Ê¹ÓÃsqlmap¡¢²Ëµ¶Á¬½ÓÆ÷¡¢get webshell¡¢post webshell½øÐÐÊ¶±ð¸æ¾¯¡£
+
 3.2.3 APT IoC
 
 3.3 »ùÓÚÉ³ÏäµÄ¶¯Ì¬·ÖÎö
@@ -139,22 +154,72 @@ ANNÊÇ¶à²ãÉñ¾­Ôª×é³ÉµÄ£¬Ã¿²ãÉñ¾­Ôª¶¼Í¨¹ýÍ»´¥Á¬½Ó¡£
 
 ANNµÄÉñ¾­ÔªÓÐÁ½ÖÖ£¬ÏÔ²ãºÍÒþ²ã¡£ÏÔ²ã½ÓÊÜÒ»¸öÏòÁ¿×÷ÎªÊäÈë£¬È»ºó¿ÉÒÔÓÃÒ»¸öÖµ×÷ÎªÆ«ÒÆ¡£
 
+3.4.2 Òþ±Î¼ÓÃÜÁ÷Á¿Ê¶±ð¸æ¾¯
 
+Õë¶ÔÒ»Ð©³£¹æ¶Ë¿ÚÈç80£¨http£©¡¢25£¨smtp£©¡¢110£¨pop£©¡¢53£¨dns£©µÈ½øÐÐ·Ç³£¹æÐ­ÒéµÄ¼ÓÃÜÁ÷Á¿´«Êä¡£Í¨¹ýÄ£ÐÍÄÜÓÐÐ§Ê¶±ð³öÕâÖÖÒþ±Î¼ÓÃÜÁ÷Á¿²¢½øÐÐ¸æ¾¯¡£
+
+3.4.3 ¿ÉÒÉ¼ÓÃÜÁ÷Á¿Ö¤ÊéÊ¶±ð¼°ÌáÈ¡
+ÌáÈ¡³ö443¶Ë¿ÚÓëÎ´Öª¶Ë¿ÚµÄsslÖ¤Êé£¬ÐèÒªÊ¶±ðÎ´Öª¶Ë¿ÚÊÇ·ñÊÇsslÐ­Òé£¬Èç¹ûÊÇ½âÂëÎªsslÐ­ÒéºóÌáÈ¡³öÍ¨Ñ¶Ö¤Êé£¬²¢¶ÔÌáÈ¡µÄÖ¤Êé½øÐÐmd5Ð§Ñé¡£
+
+3.4.4 Òì³£ÍâÁªÁ÷Á¿Ê¶±ð¸æ¾¯
+
+¶ÔÒì³£Ê±¼ä¡¢Ö÷¶¯ÍâÁªIP½øÐÐÊ¶±ðÓë¸æ¾¯
+
+»ûÐÎÊý¾Ý°ü¡¢Á÷Á¿Òì³£Ê¶±ð¸æ¾¯
+
+Í¨¹ýÍøÂçÖÐ´íÎóÊý¾Ý°ü¡¢ÖØ·¢Êý¾Ý°ü¡¢»ûÐÎÊý¾Ý°ü¼°È«Á÷Á¿½øÐÐÃ¿ÈÕÍ³¼Æ¡¢·ÖÎö¡¢±È¶ÔÀúÊ·Á÷Á¿½øÐÐ×Ô¶¨Òå·§ÖµÇø¼ä±à¼­£¬³¬³ö·§ÖµÇø¼äÁ÷Á¿½øÐÐ¸æ¾¯¡£
 4. APT¹¥»÷¼ì²â¼¼Êõ
 
 4.1 ³£¹æ¹¥»÷Ê¶±ðÄ£ÐÍ
+
+Í¨¹ý¶ÔÖ®Ç°ÌØÕ÷µÄÌáÈ¡£¬ÎÒÃÇ½¨Á¢ÁË¶Ô³£¹æ¹¥»÷µÄÊ¶±ðÄ£ÐÍ¡£
 
 4.2 ÒÑÖªAPT¹¥»÷Ê¶±ðÄ£ÐÍ
 
 4.2.1 ¸÷APT¹¥»÷ÌØÕ÷
 
+Í¨¹ýÔÄ¶Á´óÁ¿µÄapt·ÖÎö±¨¸æ[gitÉÏÄÇ¸öapt notes]£¬ÎÒÃÇ·¢ÏÖ£¬apt¹¥»÷Ö÷ÒªÓÐÏÂÃæÕâÐ©ÌØÕ÷£º
+
+- Ä¿Â¼ apt¹¥»÷Í¨³£»áÔÚÌØ¶¨µÄÄ¿Â¼»òÕßÎ»ÖÃÉú³ÉÎÄ¼þ 
+- dirver Ê¹ÓÃÇý¶¯
+- domain Í¨ÐÅÓòÃû
+- hash ÎÄ¼þµÄ¹þÏ£
+- file ÎÄ¼þÃûÎÄ¼þ
+- reg ÓÃÓÚÊ¶±ðµÄ×¢²á±í
+- service ·þÎñ
+
 4.3 Î´ÖªAPT¹¥»÷Ê¶±ðÄ£ÐÍ
 
-4.3.1 WebÇëÇó
+4.3.1 Òþ±Î¼ÓÃÜÁ÷Á¿Ê¶±ð
 
-4.3.2 Malware
+Õë¶ÔÒ»Ð©³£¹æ¶Ë¿ÚÈç80£¨http£©¡¢25£¨smtp£©¡¢110£¨pop£©¡¢53£¨dns£©µÈ½øÐÐ·Ç³£¹æÐ­ÒéµÄ¼ÓÃÜÁ÷Á¿´«Êä¡£Í¨¹ýÄ£ÐÍÄÜÓÐÐ§Ê¶±ð³öÕâÖÖÒþ±Î¼ÓÃÜÁ÷Á¿²¢½øÐÐ¸æ¾¯¡£
 
-4.3.3 C&C
+4.3.2 ½Ù³ÖÐÐÎªÊ¶±ð¸æ¾¯
+
+Ö÷ÒªÊÇÕë¶ÔArpÐ­Òé½Ù³Ö¡¢dnsÓòÃû½âÎö½Ù³Ö¡¢dhcp¡¢hostÓëreferer²»Ò»ÖÂµÄ½Ù³ÖÊ¶±ðÓë¸æ¾¯¡£
+
+7)  DDOS¡¢DNSÁ÷Á¿·Å´ó¹¥»÷Ê¶±ð¸æ¾¯
+
+Õë¶ÔDDOS¡¢DNSÁ÷Á¿·Å´ó¹¥»÷µÄÊ¶±ðÓë¸æ¾¯£¬Ê¶±ð³ö¹¥»÷Á÷Á¿µÄ´óÐ¡¡¢³ÖÐøÊ±¼ä¡¢¹¥»÷»ò±»IP¡£
+
+8)  Ä¾ÂíÐÄÌøÊ¶±ð¸æ¾¯
+
+Ä¾ÂíÁ¬½ÓÐÄÌø¼ÇÂ¼¼ä¸ôÊ±¼ä¡¢ÐÄÌøÌØµã¡¢C&C IP¡£
+
+9)  ¿ÉÒÉ¼ÓÃÜÁ÷Á¿Ö¤ÊéÊ¶±ð¼°ÌáÈ¡
+
+ÌáÈ¡³ö443¶Ë¿ÚÓëÎ´Öª¶Ë¿ÚµÄsslÖ¤Êé£¬ÐèÒªÊ¶±ðÎ´Öª¶Ë¿ÚÊÇ·ñÊÇsslÐ­Òé£¬Èç¹ûÊÇ½âÂëÎªsslÐ­ÒéºóÌáÈ¡³öÍ¨Ñ¶Ö¤Êé£¬²¢¶ÔÌáÈ¡µÄÖ¤Êé½øÐÐmd5Ð§Ñé¡£
+
+10) Òì³£ÍâÁªÁ÷Á¿Ê¶±ð¸æ¾¯
+
+¶ÔÒì³£Ê±¼ä¡¢Ö÷¶¯ÍâÁªIP½øÐÐÊ¶±ðÓë¸æ¾¯¡£
+
+11) »ûÐÎÊý¾Ý°ü¡¢Á÷Á¿Òì³£Ê¶±ð¸æ¾¯
+
+Í¨¹ýÍøÂçÖÐ´íÎóÊý¾Ý°ü¡¢ÖØ·¢Êý¾Ý°ü¡¢»ûÐÎÊý¾Ý°ü¼°È«Á÷Á¿½øÐÐÃ¿ÈÕÍ³¼Æ¡¢·ÖÎö¡¢±È¶ÔÀúÊ·Á÷Á¿½øÐÐ×Ô¶¨Òå·§ÖµÇø¼ä±à¼­£¬³¬³ö·§ÖµÇø¼äÁ÷Á¿½øÐÐ¸æ¾¯¡£
+
+
+
 
 4.4 ±¾ÕÂÐ¡½á
 
