@@ -33,6 +33,8 @@ def extract(mimes):
 
     Args:
         mimes (dict): key is mime, value is ext
+    tshark -r smtp.pcap -z conv,tcp
+    tshark -r smtp.pcap -z follow,tcp,raw,0
     """
     cnt = 0
     start = time.time()
