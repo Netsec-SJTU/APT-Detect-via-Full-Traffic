@@ -25,7 +25,13 @@ def yara(target, rulepath=Config.yaraRulePath):
 
 
 def bro(target):
-    os.system("bro -r %s %s" % (target, Config.broScriptPath))
+    if os.path.isdir(target):
+        for i in os.listdir(target):
+            if not i.endswith(".pcap"):
+                continue
+            os.system("bro -r %s %s" % (os.path.join(target, i), Config.broScriptPath))
+    else:
+        os.system("bro -r %s %s" % (target, Config.broScriptPath))
 
 
 def extract(mimes):
@@ -130,8 +136,14 @@ def rmdir(dir):
         shutil.rmtree(dir)
 
 
-def tcpflow(file):
-    os.system("tcpflow -r %s -e http -o output" % file)
+def tcpflow(target, outdir="output"):
+    if os.path.isdir(target):
+        for i in os.listdir(target):
+            if not i.endswith(".pcap"):
+                continue
+            tcpflow(os.path.join(target, i))
+
+    os.system("tcpflow -r %s -e http -o %s" % (target, dir))
     for i in os.listdir("output"):
         # if "HTTPBODY" not in i:
         if "HTTPBODY" in i:
@@ -147,8 +159,21 @@ def tcpflowfile():
             if "HTTP" in cnt:
                 print i
                 print cnt
-                raw_input("c?")
+                raw_input("continue?")
 
+
+def interactive(self):
+    while True:
+        cmd = raw_input(">>> ")
+        if cmd in ["exit", "quit"]:
+            return
+        elif cmd == "help":
+            printHelp()
+        elif cmd == "bro":
+            dst = raw_input("(dst) >>> ")
+            bro(dst)
+        elif cmd == "flow":
+            dst = raw_input("(dst) >>> ")
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
