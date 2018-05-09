@@ -25,13 +25,11 @@ def yara(target, rulepath=Config.yaraRulePath):
 
 
 def bro(target):
-    if os.path.isdir(target):
-        for i in os.listdir(target):
-            if not i.endswith(".pcap"):
-                continue
-            os.system("bro -r %s %s" % (os.path.join(target, i), Config.broScriptPath))
-    else:
-        os.system("bro -r %s %s" % (target, Config.broScriptPath))
+    '''
+    bro support dir extract
+    '''
+    print("try bro %s" % target)
+    os.system("bro -r %s %s" % (os.path.join(target, i), Config.broScriptPath))
 
 
 def extract(mimes):
@@ -46,15 +44,20 @@ def extract(mimes):
     start = time.time()
     target = mimes.keys()
 
+    if not os.path.exists("extract"):
+        os.mkdir("extract")
+
     for f in os.listdir("extract_files"):
         mime = magic.from_file("./extract_files/%s" % f, mime=True)
         if mime in target:
             ext = mimes[mime]
-            if not os.path.exists(ext):
-                os.mkdir(ext)
-            shutil.copyfile("./extract_files/%s" % f, "./%s/%s.%s" % (ext, cnt, ext))
+            if not os.path.exists(os.path.join("extract", ext)):
+                os.mkdir(os.path.join("extract", ext))
+            shutil.copyfile("./extract_files/%s" % f, "./extract/%s/%s.%s" % (ext, cnt, ext))
             cnt += 1
             print("%s file %s" % (mime, f))
+        else:
+            print("skip %s with mime %s" % (f, mime))
 
 
 def logmimes():
@@ -78,56 +81,63 @@ def logmimes():
             w.write(m+"\n")
 
 
-def choiceMime(mtype):
-    if mtype == "ms":
-        return {
+def choiceMime(mtype=[]):
+    ret = {}
+    if "ms" in mtype or "all" in mtype:
+        ret.update({
             "application/msword": "doc",
-        }
-    elif mtype == "zip":
-        return {
+        })
+    if "zip" in mtype or "all" in mtype:
+        ret.update({
             "application/gzip": "zip",
             "application/zip": "zip",
             "application/x-7z-compressed": "7z",
             "application/x-rar": "rar",
             "application/x-tar": "tar",
-        }
-    elif mtype == "audio":
-        return {
+            "application/vnd.ms-cab-compressed": "cab",
+        })
+    if "audio" in mtype or "all" in mtype:
+        ret.update({
             "audio/mp4": "mp4",
             "video/mp4": "mp4",
-        }
-    elif mtype == "image":
-        return {
+        })
+    if "image" in mtype or "all" in mtype:
+        ret.update({
             "image/gif": "gif",
             "image/jpeg": "jpeg",
             "image/png": "png",
-        }
-    elif mtype == "jar":
+        })
+    if "jar" in mtype or "all" in mtype:
         # android ana
-        return {
+        ret.update({
             "application/jar": "jar",
-        }
-    elif mtype == "txt":
-        return {
+        })
+    if "txt" in mtype or "all" in mtype:
+        ret.update({
             "text/html": "html",
+            "application/xml" : "xml",
             "text/plain": "txt",
             "text/x-asm": "asm",
             "text/x-c": "c",
-        }
-    elif mtype == "exe":
-        return {
+        })
+    if "exe" in mtype or "all" in mtype:
+        ret.update({
             # exe
             # elf
-        }
-    else:
-        return {}
+        })
+    if "bin" in mtype or "all" in mtype:
+        ret.update({
+            "application/octet-stream": "bin"
+        })
+
+    return ret
 
 
 def printHelp():
     print "python aptd.py log"
     print "python aptd.py clear"
     print "python aptd.py bro test.pcap"
-    print "python aptd.py e image"
+    print "python aptd.py e image,js"
     print "python aptd.py all test.pcap"
 
 
@@ -175,11 +185,15 @@ def interactive(self):
         elif cmd == "flow":
             dst = raw_input("(dst) >>> ")
 
+
 if __name__ == '__main__':
     if len(sys.argv) < 2:
         printHelp()
     elif sys.argv[1] == "e":
-        extract(choiceMime(sys.argv[2]))
+        if len(sys.argv) > 2:
+            extract(choiceMime(sys.argv[2].split(",")))
+        else:
+            extract(choiceMime(["all"]))
     elif sys.argv[1] == "clear":
         removes = [
             "extract_files",
