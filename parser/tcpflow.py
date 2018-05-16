@@ -10,8 +10,8 @@ def tcpflow(target, outdir="tcpflow"):
             if not i.endswith(".pcap"):
                 continue
             tcpflow(os.path.join(target, i))
-
-    os.system("tcpflow -r %s -e http -o %s" % (target, dir))
+    else:
+        os.system("tcpflow -r %s -e http -o %s" % (target, outdir))
     # for i in os.listdir("tcpflow"):
         # if "HTTPBODY" not in i:
         # if "HTTPBODY" in i:

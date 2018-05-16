@@ -19,18 +19,21 @@ class Traffic(BaseTable):
     srcip = Column(VARCHAR(32))
     dstip = Column(VARCHAR(32))
     threat = Column(VARCHAR(30))
+    severity = Column(VARCHAR(10))
     time = Column(TIMESTAMP)
     reference = Column(VARCHAR(100))
     comment = Column(VARCHAR(600))
 
     @classmethod
-    def add(cls, db, dstport, srcport, srcip, dstip, info=""):
+    def add(cls, db, dstport, srcport, srcip, dstip,
+            threat, severity, time, reference, comment):
         t = Traffic()
         t.dstport = dstport
         t.srcport = srcport
         t.srcip = srcip
         t.dstip = dstip
         t.threat = threat
+        t.severity = severity
         t.time = time
         t.reference = reference
         t.comment = comment

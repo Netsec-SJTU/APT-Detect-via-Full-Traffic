@@ -69,6 +69,8 @@ CREATE TABLE `httpids` (
     -- split by '|'
     `value` VARCHAR(200) NOT NULL,
     -- regex
+    `threat` VARCHAR(30) NOT NULL,
+    `severity` VARCHAR(10) NOT NULL,
     `reference` VARCHAR(100) NOT NULL
 );
 

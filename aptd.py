@@ -3,14 +3,16 @@
 
 
 import sys
+import time
 
 from common.core import initDB
 from common.utils import rmdir
 
 from parser.bro import *
 from parser.yara import *
-from parser.tcpflow import *
+from parser.tcpflow import tcpflow
 from parser.mime import *
+from parser.http import HttpParser
 
 from Trafficker.packets.pcap import Pcap
 from Trafficker.handlers.tcp import tcpHandler
@@ -78,9 +80,22 @@ if __name__ == '__main__':
         # http flow => rule
         tcpflow(sys.argv[2])
         Pcap(sys.argv[2], [])
-        '''
-        for i in os.listdir("http"):
-            HttpParser.parse(i.read())
-            if HTTPIDS.match(db, key, value):
-                Traffic.add(db, dstport, srcport, srcip, dstip)
-        '''
+    elif sys.argv[1] == "test":
+        db = initDB()
+        for i in os.listdir("tcpflow"):
+            h = HttpParser()
+            h.parse(open(os.path.join("tcpflow", i), "rb").read())
+            # print(h.headers)
+            if h.type == 2:
+                # response
+                continue
+            src, dst = i.split("-")
+            srcip = "".join(map(lambda i: str(int(i)), src.split(".")[:3]))
+            srcport = int(src.split(".")[-1])
+            dstip = "".join(map(lambda i: str(int(i)), dst.split(".")[:3]))
+            dstport = int(dst.split(".")[-1])
+            if "user-agent" in h.headers:
+                ret = HTTPIDS.match(db, "ua", h.headers["user-agent"][1])
+                if ret:
+                    Traffic.add(db, dstport, srcport, srcip, dstip,
+                                ret.hreat, ret.severity, time.time(), ret.reference, ret.comment)

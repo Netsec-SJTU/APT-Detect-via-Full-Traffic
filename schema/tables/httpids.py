@@ -18,13 +18,17 @@ class HTTPIDS(BaseTable):
     uid = Column(VARCHAR(32), primary_key=True, default=guid)
     key = Column(VARCHAR(30))
     value = Column(VARCHAR(200))
+    threat = Column(VARCHAR(30))
+    severity = Column(VARCHAR(10))
     reference = Column(VARCHAR(100))
 
     @classmethod
-    def add(cls, db, key, value, reference):
+    def add(cls, db, key, value, threat, severity, reference):
         h = HTTPIDS()
         h.key = key
         h.value = value
+        h.threat = threat
+        h.severity = severity
         h.reference = reference
         db.add(h)
         db.commit()
