@@ -15,19 +15,34 @@
     <table class="table table-bordered">
         <thead class="thead-dark">
             <tr>
+                <th scope="col">id</th>
                 <th scope="col">threat</th>
+                <th scope="col">severity</th>
                 <th scope="col">time</th>
-                <th scope="col">scrip</th>
-                <th scope="col">srcport</th>
-                <th scope="col">dstip</th>
-                <th scope="col">dstport</th>
-                <th scope="col">info</th>
-                <th scope="col">comment</th>
+                <th scope="col">scr</th>
+                <th scope="col">dst</th>
+                <th scope="col">proto</th>
+                <th scope="col">reference</th>
+                <th scope="col">tags</th>
             </tr>
         </thead>
         <tbody>
             <tr v-for="threat in threats">
-                <td v-for="v in threat">{{! v }}</td>
+                <div class="row">
+                    <td class="col-1">
+                        <span class="badge badge-primary">
+                            {{! threat.id }}
+                        </span>
+                    </td>
+                    <td class="col-1">{{! threat.threat }}</td>
+                    <td class="col-1">{{! threat.severity }}</td>
+                    <td class="col-2">{{! threat.time }}</td>
+                    <td class="col-1">{{! threat.srcip }}:{{! threat.srcport }}</td>
+                    <td class="col-1">{{! threat.dstip }}:{{! threat.dstport }}</td>
+                    <td class="col-1">{{! threat.proto }}</td>
+                    <td class="col-1">{{! threat.reference }}</td>
+                    <td class="col-1">{{! threat.tags }}</td>
+                </div>
             </tr>
         </tbody>
     </table>
