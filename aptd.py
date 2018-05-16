@@ -4,6 +4,7 @@
 
 import sys
 
+from common.core import initDB
 from common.mime import choiceMime
 from common.mime import logmimes
 from common.utils import rmdir
@@ -11,6 +12,9 @@ from common.utils import rmdir
 from parser.bro import *
 from parser.yara import *
 from parser.tcpflow import *
+
+from Trafficker.packets.pcap import Pcap
+from Trafficker.handlers.tcp import tcpHandler
 
 
 def printHelp():
@@ -68,3 +72,4 @@ if __name__ == '__main__':
         # split http flow
         # http flow => rule
         tcpflow(sys.argv[2])
+        Pcap(sys.argv[2], [])

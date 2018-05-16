@@ -15,15 +15,6 @@ CREATE TABLE `traffic` (
     `comment` VARCHAR(600) NOT NULL
 );
 
-CREATE TABLE `tcp`  (
-    `uid` VARCHAR(32) NOT NULL,
-    `srcip` VARCHAR(32) NOT NULL,
-    `srcport` INT NOT NULL,
-    `dstip` VARCHAR(32) NOT NULL,
-    `dstport` INT NOT NULL,
-    `payload` VARCHAR(600) NOT NULL
-);
-
 CREATE TABLE `malware` (
     `uid` VARCHAR(32) NOT NULL,
     `md5` VARCHAR(32) NOT NULL,
@@ -31,6 +22,60 @@ CREATE TABLE `malware` (
     `mtype` VARCHAR(20) NOT NULL,
     `info` VARCHAR(600) NOT NULL,
     `comment` VARCHAR(600) NOT NULL
+);
+
+CREATE TABLE `http`  (
+    `uid` VARCHAR(32) NOT NULL,
+    `method` VARCHAR(32) NOT NULL,
+    `url` VARCHAR(32) NOT NULL,
+    `host` VARCHAR(32) NOT NULL,
+    `ua` VARCHAR(32) NOT NULL,
+    `get` VARCHAR(32) NOT NULL,
+    `post` VARCHAR(32) NOT NULL,
+    `cookie` VARCHAR(32) NOT NULL
+);
+
+CREATE TABLE `tcp`  (
+    `uid` VARCHAR(32) NOT NULL,
+    `srcip` VARCHAR(32) NOT NULL,
+    `srcport` INT NOT NULL,
+    `dstip` VARCHAR(32) NOT NULL,
+    `dstport` INT NOT NULL,
+    `payload` TEXT NOT NULL
+);
+
+CREATE TABLE `udp`  (
+    `uid` VARCHAR(32) NOT NULL,
+    `srcip` VARCHAR(32) NOT NULL,
+    `srcport` INT NOT NULL,
+    `dstip` VARCHAR(32) NOT NULL,
+    `dstport` INT NOT NULL,
+    `payload` TEXT NOT NULL
+);
+
+CREATE TABLE `httpids` (
+    `uid` VARCHAR(32) NOT NULL,
+    `key` VARCHAR(30) NOT NULL, 
+    -- *
+    -- ua
+    -- url
+    -- get
+    -- post
+    -- cookie
+    -- file
+    -- split by '|'
+    `value` VARCHAR(200) NOT NULL
+    -- regex
+);
+
+
+CREATE TABLE `freq` (
+    `uid` VARCHAR(32) NOT NULL,
+    `srcip` VARCHAR(32) NOT NULL,
+    `srcport` INT NOT NULL,
+    `dstip` VARCHAR(32) NOT NULL,
+    `dstport` INT NOT NULL,
+    `time` TIMESTAMP
 );
 
 
