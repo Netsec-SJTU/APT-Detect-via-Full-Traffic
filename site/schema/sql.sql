@@ -8,10 +8,20 @@ use `aptd`;
 CREATE TABLE `traffic` (
     `uid` VARCHAR(32) NOT NULL,
     `srcip` VARCHAR(32) NOT NULL,
+    `srcport` INT NOT NULL,
     `dstip` VARCHAR(32) NOT NULL,
     `dstport` INT NOT NULL,
     `info` VARCHAR(600) NOT NULL,
     `comment` VARCHAR(600) NOT NULL
+);
+
+CREATE TABLE `tcp`  (
+    `uid` VARCHAR(32) NOT NULL,
+    `srcip` VARCHAR(32) NOT NULL,
+    `srcport` INT NOT NULL,
+    `dstip` VARCHAR(32) NOT NULL,
+    `dstport` INT NOT NULL,
+    `payload` VARCHAR(600) NOT NULL
 );
 
 CREATE TABLE `malware` (

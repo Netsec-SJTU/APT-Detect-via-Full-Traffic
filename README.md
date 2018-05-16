@@ -18,10 +18,14 @@
 # 实现逻辑
 
 - 读入pcap
+    - 访问频率统计
     - tcp重组包
         - http解析
+            - tcpflow
         - smtp解析
+            - tcpflow
         - ftp解析
+            - tcpflow
     - udp包
         - dns解析
             - dns特征扩展
