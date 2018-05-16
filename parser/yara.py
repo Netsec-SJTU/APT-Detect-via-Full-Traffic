@@ -3,10 +3,10 @@
 
 import os
 
-from config import Config
+from common.path import Paths
 
 
-def yara(target, rulepath=Config.yaraRulePath):
+def yara(target, rulepath=Paths.yaraRulePath):
     if not os.path.isdir(target):
         os.system("yara -w %s %s" % (rulepath, target))
     for i in os.listdir(target):

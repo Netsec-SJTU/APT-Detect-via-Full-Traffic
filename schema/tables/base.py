@@ -10,17 +10,21 @@ from sqlalchemy.ext.declarative import as_declarative
 @as_declarative()
 class BaseTable(object):
 
-    def toStr(self):
+    def toStr(self, blist=[]):
         s = deepcopy(self.__dict__)
         del(s['_sa_instance_state'])
-        if "time" in s:
-            s["time"] = str(s["time"])
+        for i in s:
+            if isinstance(s[i], datetime.datetime):
+                s[i] = str(s[i])
+        for b in blist:
+            if b in s:
+                del s[b]
         return s
 
     @classmethod
-    def getAll(cls, db, toStr=False):
+    def getAll(cls, db, toStr=False, blist=[]):
         if toStr:
-            return [i.toStr() for i in db.query(cls).all()]
+            return [i.toStr(blist) for i in db.query(cls).all()]
         else:
             return db.query(cls).all()
 

@@ -15,6 +15,9 @@ from parser.mime import *
 from Trafficker.packets.pcap import Pcap
 from Trafficker.handlers.tcp import tcpHandler
 
+from schema.tables.httpids import HTTPIDS
+from schema.tables.traffic import Traffic
+
 
 def printHelp():
     print "python aptd.py log"
@@ -62,7 +65,10 @@ if __name__ == '__main__':
             yara(sys.argv[2], sys.argv[3])
         else:
             yara(sys.argv[2])
+    elif sys.argv[1] == "flow":
+        tcpflow(sys.argv[2])
     elif sys.argv[1] == "all":
+        db = initDB()
         # sys.argv[2] => pcap file path
         # extract file from traffic
         bro(sys.argv[2])
@@ -72,3 +78,9 @@ if __name__ == '__main__':
         # http flow => rule
         tcpflow(sys.argv[2])
         Pcap(sys.argv[2], [])
+        '''
+        for i in os.listdir("http"):
+            HttpParser.parse(i.read())
+            if HTTPIDS.match(db, key, value):
+                Traffic.add(db, dstport, srcport, srcip, dstip)
+        '''

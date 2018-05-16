@@ -2,7 +2,9 @@
 # -*- coding:utf-8 -*-
 
 import tornado.web
+
 from server.controller.base import BaseHandler
+from schema.tables.traffic import Traffic
 
 
 class MainHandler(BaseHandler):
@@ -14,7 +16,7 @@ class MainHandler(BaseHandler):
 class TrafficHandler(BaseHandler):
 
     def get(self):
-        self.render("traffic.html")
+        self.ok(Traffic.getAll())
 
 
 class MalwareHandler(BaseHandler):

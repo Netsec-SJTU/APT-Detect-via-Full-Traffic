@@ -11,7 +11,10 @@ CREATE TABLE `traffic` (
     `srcport` INT NOT NULL,
     `dstip` VARCHAR(32) NOT NULL,
     `dstport` INT NOT NULL,
-    `info` VARCHAR(600) NOT NULL,
+    `threat` VARCHAR(30) NOT NULL,
+    `severity` VARCHAR(10) NOT NULL,
+    `time` TIMESTAMP,
+    `reference` VARCHAR(100) NOT NULL,
     `comment` VARCHAR(600) NOT NULL
 );
 
@@ -64,8 +67,9 @@ CREATE TABLE `httpids` (
     -- cookie
     -- file
     -- split by '|'
-    `value` VARCHAR(200) NOT NULL
+    `value` VARCHAR(200) NOT NULL,
     -- regex
+    `reference` VARCHAR(100) NOT NULL
 );
 
 

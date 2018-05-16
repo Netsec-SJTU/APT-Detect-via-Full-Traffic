@@ -87,6 +87,9 @@ class HttpParser(object):
         self.chunker = None
 
     def parse(self, data):
+        if data.startswith("HTTP"):
+            self.type = HTTP_RESPONSE_PARSER
+
         self.raw += data
         data = self.buffer + data
         self.buffer = b''

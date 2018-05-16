@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import os
+import sys
+sys.path.append(os.path.join("..", ".."))
 
 from common.core import initDB
 from schema.tables.httpids import HTTPIDS
@@ -31,4 +34,4 @@ regexps = [
 ]
 
 for r in regexps:
-    HTTPIDS.add(db, "*", r)
+    HTTPIDS.add(db, "*", r, "waf")
