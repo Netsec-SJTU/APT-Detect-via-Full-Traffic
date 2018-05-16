@@ -96,3 +96,9 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# bro
+extract/
+extract_files/
+
+logs/*

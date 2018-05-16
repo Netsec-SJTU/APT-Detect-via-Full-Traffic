@@ -46,11 +46,7 @@ if __name__ == '__main__':
     elif sys.argv[1] == "clear":
         removes = [
             "extract_files",
-            "png",
-            "jpeg",
-            "gif",
-            "mp4",
-            "zip",
+            "extract",
         ]
         for r in removes:
             rmdir(r)
