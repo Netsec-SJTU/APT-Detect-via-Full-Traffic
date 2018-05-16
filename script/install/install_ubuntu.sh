@@ -35,3 +35,7 @@ sudo pip3 install -U scikit-learn matplotlib pandas
 git clone https://github.com/faizann24/Fwaf-Machine-Learning-driven-Web-Application-Firewall
 mv Fwaf-Machine-Learning-driven-Web-Application-Firewall Fwaf
 git clone https://github.com/zoufutai/APT-Detect-via-Full-Traffic
+
+# site
+
+sudo pip install -U pymysql

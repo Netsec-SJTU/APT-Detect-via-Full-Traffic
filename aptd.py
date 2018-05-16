@@ -5,13 +5,12 @@
 import sys
 
 from common.core import initDB
-from common.mime import choiceMime
-from common.mime import logmimes
 from common.utils import rmdir
 
 from parser.bro import *
 from parser.yara import *
 from parser.tcpflow import *
+from parser.mime import *
 
 from Trafficker.packets.pcap import Pcap
 from Trafficker.handlers.tcp import tcpHandler
