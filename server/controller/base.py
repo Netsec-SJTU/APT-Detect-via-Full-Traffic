@@ -4,16 +4,20 @@
 import json
 import tornado.web
 
+from schema.tables.base import DBSession
 
 class BaseHandler(tornado.web.RequestHandler):
 
-    @property
-    def db(self):
-        return self.application.db
-
     def on_finish(self):
-        self.db.flush()
-        self.db.close()
+        # every thread should has its own session
+        # no... there is a bug
+        # will double free 2333
+        # 并发就炸了 
+        db = DBSession()
+        db.flush()
+        db.close()
+        db.remove()
+        DBSession._db = None
 
     def ok(self, data):
         self.set_header('Content-Type', 'application/json; charset="utf-8"')

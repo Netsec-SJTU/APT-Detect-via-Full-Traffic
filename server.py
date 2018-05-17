@@ -11,14 +11,11 @@ from common.config import DEBUG
 from common.config import settings
 from common.config import handlers
 
-from common.core import initDB
 
 def main():
     try:
         app = tornado.web.Application(handlers, debug=DEBUG, **settings)
-        app.db = initDB()
         print("[*] Server run at %s" % tornado.options.options.url)
-        
         if True:
             app.listen(tornado.options.options.port)
             tornado.ioloop.IOLoop.instance().start()
@@ -32,6 +29,7 @@ def main():
     finally:
         import sys
         sys.exit(0)
+
 
 if __name__ == "__main__":
     main()

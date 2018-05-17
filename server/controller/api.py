@@ -17,13 +17,13 @@ class MainHandler(BaseHandler):
 class TrafficHandler(BaseHandler):
 
     def get(self):
-        self.ok(Traffic.getPage(self.db))
+        self.ok(Traffic.getPage())
 
 
 class MalwareHandler(BaseHandler):
 
     def get(self):
-        self.ok(Malware.getPage(self.db))
+        self.ok(Malware.getPage())
 
 
 class SubmitHandler(BaseHandler):

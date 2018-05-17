@@ -11,21 +11,20 @@ from schema.tables.base import BaseTable
 from common.utils import guid
 
 
-class HTTPIDS(BaseTable):
+class FILEIDS(BaseTable):
 
-    __tablename__ = 'httpids'
+    __tablename__ = 'fileids'
 
     uid = Column(VARCHAR(32), primary_key=True, default=guid)
-    key = Column(VARCHAR(30))
-    value = Column(VARCHAR(200))
+    mtype = Column(VARCHAR(20))
     threat = Column(VARCHAR(30))
     severity = Column(VARCHAR(10))
     reference = Column(VARCHAR(100))
 
     @classmethod
-    def add(cls, key, value, threat, severity, reference):
-        h = HTTPIDS()
-        h.key = key
+    def add(cls, mtype, threat, severity, reference):
+        h = FILEIDS()
+        h.mtype = mtype
         h.value = value
         h.threat = threat
         h.severity = severity
@@ -35,10 +34,9 @@ class HTTPIDS(BaseTable):
         return True
 
     @classmethod
-    def match(cls, key, value):
-        rules = cls.getAll()
-        for r in rules:
-            if r.key == "*" or r.key == key:
-                if re.search(r.value, value, re.I):
-                    return r
-        return False
+    def getByMtype(cls, mtype):
+        obj = cls.db.query(cls).filter(cls.mtype == mtype)
+        if obj.count() < 1:
+            return None
+        else:
+            return obj.one()

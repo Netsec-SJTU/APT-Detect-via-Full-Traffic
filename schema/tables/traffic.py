@@ -26,7 +26,7 @@ class Traffic(BaseTable):
     comment = Column(VARCHAR(600))
 
     @classmethod
-    def add(cls, db, dstport, srcport, srcip, dstip,
+    def add(cls, dstport, srcport, srcip, dstip,
             threat, severity, proto, time, reference, comment):
         t = Traffic()
         t.dstport = dstport
@@ -39,12 +39,12 @@ class Traffic(BaseTable):
         t.time = time
         t.reference = reference
         t.comment = comment
-        db.add(t)
-        db.commit()
+        cls.db.add(t)
+        cls.db.commit()
         return True
 
     @classmethod
-    def getPage(cls, db):
+    def getPage(cls):
         return [
-            i.toStr() for i in db.query(cls).order_by(cls.time.desc()).limit(11)
+            i.toStr() for i in cls.db.query(cls).order_by(cls.time.desc()).limit(11)
         ]
