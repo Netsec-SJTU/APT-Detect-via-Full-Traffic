@@ -8,16 +8,15 @@ from schema.tables.base import DBSession
 
 class BaseHandler(tornado.web.RequestHandler):
 
+    def initialize(self):
+        DBSession(True)
+
     def on_finish(self):
-        # every thread should has its own session
-        # no... there is a bug
-        # will double free 2333
-        # 并发就炸了 
         db = DBSession()
         db.flush()
         db.close()
         db.remove()
-        DBSession._db = None
+        del DBSession._db
 
     def ok(self, data):
         self.set_header('Content-Type', 'application/json; charset="utf-8"')

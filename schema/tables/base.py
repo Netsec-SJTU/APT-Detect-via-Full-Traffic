@@ -48,16 +48,14 @@ class BaseTable(object):
         return True
 
 
-def DBSession():
-    if hasattr(DBSession, "_db") and DBSession._db is not None:
-        print("has", id(DBSession._db))
+def DBSession(forceNew=False):
+    if hasattr(DBSession, "_db") and not forceNew:
         return DBSession._db
     # 初始化数据库
     session_factory = sessionmaker()
     session_factory.configure(bind=engine)
     BaseTable.metadata.create_all(engine)
     DBSession._db = scoped_session(session_factory)
-    print("new", id(DBSession._db))
     return DBSession._db
 
 
