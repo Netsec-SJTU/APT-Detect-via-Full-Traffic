@@ -12,7 +12,7 @@ def bro(target):
     '''
     bro support dir extract
     '''
-    print("try bro %s" % target)
+    print("run bro on %s" % target)
     os.system("bro -r %s %s" % (target, Paths.broScriptPath))
 
 
