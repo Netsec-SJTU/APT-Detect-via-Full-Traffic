@@ -19,30 +19,28 @@
                 <th scope="col">threat</th>
                 <th scope="col">severity</th>
                 <th scope="col">time</th>
-                <th scope="col">scr</th>
-                <th scope="col">dst</th>
+                <th scope="col">source</th>
+                <th scope="col">destination</th>
                 <th scope="col">proto</th>
                 <th scope="col">reference</th>
-                <th scope="col">tags</th>
+                <th scope="col">comment</th>
             </tr>
         </thead>
         <tbody>
             <tr v-for="threat in threats">
-                <div class="row">
-                    <td class="col-1">
-                        <span class="badge badge-primary">
-                            {{! threat.id }}
+                <td>
+                    <span class="badge badge-primary">
+                            {{! threat.uid.substr(0, 6) }}
                         </span>
-                    </td>
-                    <td class="col-1">{{! threat.threat }}</td>
-                    <td class="col-1">{{! threat.severity }}</td>
-                    <td class="col-2">{{! threat.time }}</td>
-                    <td class="col-1">{{! threat.srcip }}:{{! threat.srcport }}</td>
-                    <td class="col-1">{{! threat.dstip }}:{{! threat.dstport }}</td>
-                    <td class="col-1">{{! threat.proto }}</td>
-                    <td class="col-1">{{! threat.reference }}</td>
-                    <td class="col-1">{{! threat.tags }}</td>
-                </div>
+                </td>
+                <td>{{! threat.threat }}</td>
+                <td>{{! threat.severity }}</td>
+                <td>{{! threat.time.split(" ")[0] }}</td>
+                <td>{{! threat.srcip }}:{{! threat.srcport }}</td>
+                <td>{{! threat.dstip }}:{{! threat.dstport }}</td>
+                <td>{{! threat.proto }}</td>
+                <td>{{! threat.reference }}</td>
+                <td>{{! threat.comment }}</td>
             </tr>
         </tbody>
     </table>
@@ -51,9 +49,9 @@
             <li class="page-item disabled">
                 <a class="page-link" href="#" tabindex="-1">Previous</a>
             </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li v-for="p in pages">
+                <a class="page-link" href="#">{{! p }}</a>
+            </li>
             <li class="page-item">
                 <a class="page-link" href="#">Next</a>
             </li>

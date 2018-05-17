@@ -13,6 +13,7 @@ CREATE TABLE `traffic` (
     `dstport` INT NOT NULL,
     `threat` VARCHAR(30) NOT NULL,
     `severity` VARCHAR(10) NOT NULL,
+    `proto` VARCHAR(10) NOT NULL,
     `time` TIMESTAMP,
     `reference` VARCHAR(100) NOT NULL,
     `comment` VARCHAR(600) NOT NULL

@@ -39,6 +39,6 @@ class HTTPIDS(BaseTable):
         rules = cls.getAll(db)
         for r in rules:
             if r.key == "*" or r.key == key:
-                if re.match(r.value, value, re.I):
+                if re.search(r.value, value, re.I):
                     return r
         return False

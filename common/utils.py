@@ -4,6 +4,7 @@
 import os
 import uuid
 import shutil
+import time
 
 
 def guid():
@@ -13,3 +14,8 @@ def guid():
 def rmdir(dir):
     if os.path.exists(dir):
         shutil.rmtree(dir)
+
+
+def now():
+    # 返回当前时间
+    return time.strftime('%Y-%m-%d %X', time.localtime(time.time()))

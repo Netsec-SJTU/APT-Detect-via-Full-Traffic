@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import os
+import magic
 import shutil
 
 from common.path import Paths
@@ -12,7 +13,7 @@ def bro(target):
     bro support dir extract
     '''
     print("try bro %s" % target)
-    os.system("bro -r %s %s" % (os.path.join(target, i), Paths.broScriptPath))
+    os.system("bro -r %s %s" % (target, Paths.broScriptPath))
 
 
 def extractBro(mimes):

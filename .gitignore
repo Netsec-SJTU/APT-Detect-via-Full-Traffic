@@ -104,3 +104,10 @@ extract_files/
 logs/*
 
 test.py
+
+# tcpflow
+tcpflow/
+
+# pcap
+
+pcap/

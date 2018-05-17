@@ -16,7 +16,7 @@ class MainHandler(BaseHandler):
 class TrafficHandler(BaseHandler):
 
     def get(self):
-        self.ok(Traffic.getAll())
+        self.ok(Traffic.getPage(self.db))
 
 
 class MalwareHandler(BaseHandler):

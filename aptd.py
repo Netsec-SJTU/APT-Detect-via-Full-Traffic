@@ -3,16 +3,16 @@
 
 
 import sys
-import time
 
 from common.core import initDB
 from common.utils import rmdir
+from common.utils import now
 
-from parser.bro import *
-from parser.yara import *
-from parser.tcpflow import tcpflow
-from parser.mime import *
-from parser.http import HttpParser
+from mparser.bro import *
+from mparser.yara import *
+from mparser.tcpflow import tcpflow
+from mparser.mime import *
+from mparser.http import HttpParser
 
 from Trafficker.packets.pcap import Pcap
 from Trafficker.handlers.tcp import tcpHandler
@@ -83,19 +83,44 @@ if __name__ == '__main__':
     elif sys.argv[1] == "test":
         db = initDB()
         for i in os.listdir("tcpflow"):
+            if "HTTP" in i:
+                continue
+            if i == "report.xml":
+                continue
+            if i == "alerts.txt":
+                continue
             h = HttpParser()
             h.parse(open(os.path.join("tcpflow", i), "rb").read())
             # print(h.headers)
             if h.type == 2:
                 # response
                 continue
-            src, dst = i.split("-")
-            srcip = "".join(map(lambda i: str(int(i)), src.split(".")[:3]))
+
+            try:
+                src, dst = i.split("-")
+            except Exception as e:
+                print(e)
+                print(i)
+                continue
+
+            srcip = ".".join(map(lambda i: str(int(i)), src.split(".")[:4]))
             srcport = int(src.split(".")[-1])
-            dstip = "".join(map(lambda i: str(int(i)), dst.split(".")[:3]))
+            dstip = ".".join(map(lambda i: str(int(i)), dst.split(".")[:4]))
             dstport = int(dst.split(".")[-1])
             if "user-agent" in h.headers:
                 ret = HTTPIDS.match(db, "ua", h.headers["user-agent"][1])
                 if ret:
-                    Traffic.add(db, dstport, srcport, srcip, dstip,
-                                ret.hreat, ret.severity, time.time(), ret.reference, ret.comment)
+                    Traffic.add(
+                        db, dstport, srcport, srcip, dstip,
+                        ret.threat, ret.severity, "HTTP",
+                        now(), ret.reference, "sqlmap.pcap"
+                    )
+                    continue
+            # print(h.url.query)
+            ret = HTTPIDS.match(db, "url", h.url.query)
+            if ret:
+                Traffic.add(
+                    db, dstport, srcport, srcip, dstip,
+                    ret.threat, ret.severity, "HTTP",
+                    now(), ret.reference, "sqlmap.pcap"
+                )

@@ -20,13 +20,14 @@ class Traffic(BaseTable):
     dstip = Column(VARCHAR(32))
     threat = Column(VARCHAR(30))
     severity = Column(VARCHAR(10))
+    proto = Column(VARCHAR(10))
     time = Column(TIMESTAMP)
     reference = Column(VARCHAR(100))
     comment = Column(VARCHAR(600))
 
     @classmethod
     def add(cls, db, dstport, srcport, srcip, dstip,
-            threat, severity, time, reference, comment):
+            threat, severity, proto, time, reference, comment):
         t = Traffic()
         t.dstport = dstport
         t.srcport = srcport
@@ -34,9 +35,16 @@ class Traffic(BaseTable):
         t.dstip = dstip
         t.threat = threat
         t.severity = severity
+        t.proto = proto
         t.time = time
         t.reference = reference
         t.comment = comment
         db.add(t)
         db.commit()
         return True
+
+    @classmethod
+    def getPage(cls, db):
+        return [
+            i.toStr() for i in db.query(cls).order_by(cls.time.desc()).limit(11)
+        ]
