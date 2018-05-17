@@ -44,4 +44,5 @@ handlers = [
     (r"/malware", "server.controller.main.MalwareHandler"),
     (r"/submit", "server.controller.main.SubmitHandler"),
     (r"/api/traffic", "server.controller.api.TrafficHandler"),
+    (r"/api/malware", "server.controller.api.MalwareHandler"),
 ]

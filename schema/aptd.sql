@@ -21,11 +21,16 @@ CREATE TABLE `traffic` (
 
 CREATE TABLE `malware` (
     `uid` VARCHAR(32) NOT NULL,
-    `md5` VARCHAR(32) NOT NULL,
-    `sha1` VARCHAR(64) NOT NULL,
+    `sha256` VARCHAR(64) NOT NULL,
+    `filename` VARCHAR(100) NOT NULL,
+    `time` TIMESTAMP,
     `mtype` VARCHAR(20) NOT NULL,
-    `info` VARCHAR(600) NOT NULL,
+    -- malware type
+    `severity` VARCHAR(10) NOT NULL,
+    `reference` VARCHAR(100) NOT NULL,
+    -- refer to how to make sure that
     `comment` VARCHAR(600) NOT NULL
+    -- some info, such as come from where
 );
 
 CREATE TABLE `http`  (

@@ -5,6 +5,7 @@ import tornado.web
 
 from server.controller.base import BaseHandler
 from schema.tables.traffic import Traffic
+from schema.tables.malware import Malware
 
 
 class MainHandler(BaseHandler):
@@ -22,7 +23,7 @@ class TrafficHandler(BaseHandler):
 class MalwareHandler(BaseHandler):
 
     def get(self):
-        self.render("malware.html")
+        self.ok(Malware.getPage(self.db))
 
 
 class SubmitHandler(BaseHandler):
