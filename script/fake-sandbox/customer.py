@@ -13,7 +13,7 @@ HOST = '192.168.10.1'
 PORT = 10888
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect((HOST, PORT))
-data = "发送病毒编号"
+data = "SendVirusName"
 while data:
     s.sendall(data.encode('utf-8'))
     data = s.recv(512)
@@ -25,7 +25,7 @@ bingdu = 'start C:\\Users\\Administrator\\Desktop\\bingdu\\'+data+'.exe'
 f = open('C:\\Users\\Administrator\\Desktop\\NO.bat', 'w')
 f.write(bingdu)
 f.close()
-os.system('C:\\Users\\Administrator\\Desktop\\运行.bat')
+os.system('C:\\Users\\Administrator\\Desktop\\RunFakenet.bat')
 
 time.sleep(10)
 os.system('C:\\Users\\Administrator\\Desktop\\NO.bat')
@@ -52,7 +52,7 @@ for filename in files:
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect((HOST, PORT))
-data = '病毒分析完毕'
+data = 'AnalysisComplete'
 while data:
     s.sendall(data.encode('utf-8'))
     break

@@ -18,7 +18,7 @@ for i in range(77):
         j = str(i)
         data = conn.recv(1024)
         data = data.decode('utf-8')
-        if data == '发送病毒编号':
+        if data == 'SendVirusName':
             conn.sendall(j.encode('utf-8'))
             break
     conn.close()
@@ -29,8 +29,8 @@ for i in range(77):
     while True:
         data = conn.recv(1024)
         data = data.decode('utf-8')
-        if data == '病毒分析完毕':
-            print('病毒分析完毕，即将重启虚拟机并恢复快照')
+        if data == 'AnalysisComplete':
+            print('Analysis Complete, Restarting...')
             time.sleep(25)
             os.system('C:\\Users\\Administrator\\Desktop\\powerup.bat')
             break

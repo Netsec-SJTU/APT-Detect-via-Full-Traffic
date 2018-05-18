@@ -1,1 +1,0 @@
-start C:\Users\Administrator\Desktop\bingdu\0.exe
