@@ -95,32 +95,30 @@ if __name__ == '__main__':
             if h.type == 2:
                 # response
                 continue
-
             try:
                 src, dst = i.split("-")
             except Exception as e:
                 print(e)
                 print(i)
                 continue
-
             srcip = ".".join(map(lambda i: str(int(i)), src.split(".")[:4]))
             srcport = int(src.split(".")[-1])
             dstip = ".".join(map(lambda i: str(int(i)), dst.split(".")[:4]))
             dstport = int(dst.split(".")[-1])
+            comment = "QWB.pcap"
+            tests = []
             if "user-agent" in h.headers:
-                ret = HTTPIDS.match(db, "ua", h.headers["user-agent"][1])
+                tests.append(["ua", h.headers["user-agent"][1]])
+            tests.append(["url", h.url.path])
+            tests.append(["*", h.url.query])
+            tests.append(["*", h.body])
+            tests.append(["*", h.build_all_header()])
+            for t in tests:
+                ret = HTTPIDS.match(t[0], t[1])
                 if ret:
                     Traffic.add(
-                        db, dstport, srcport, srcip, dstip,
+                        dstport, srcport, srcip, dstip,
                         ret.threat, ret.severity, "HTTP",
-                        now(), ret.reference, "sqlmap.pcap"
+                        now(), ret.reference, comment
                     )
                     continue
-            # print(h.url.query)
-            ret = HTTPIDS.match(db, "url", h.url.query)
-            if ret:
-                Traffic.add(
-                    db, dstport, srcport, srcip, dstip,
-                    ret.threat, ret.severity, "HTTP",
-                    now(), ret.reference, "sqlmap.pcap"
-                )
