@@ -10,7 +10,7 @@ from schema.tables.httpids import HTTPIDS
 
 db = initDB()
 
-HTTPIDS.add("*", r"\.\.", "DirTraversal", "Low", "waf")
+HTTPIDS.add("*", r"\\\.\.\\\.\.", "DirTraversal", "Low", "waf")
 HTTPIDS.add("*", r"select.+(from)", "SQLi", "Medium", "waf")
 HTTPIDS.add("*", r"(?:(union(.*?)select))", "SQLi", "Medium", "waf")
 HTTPIDS.add("*", r"sleep\((\s*)(\d*)(\s*)\)", "SQLi", "Medium", "waf")

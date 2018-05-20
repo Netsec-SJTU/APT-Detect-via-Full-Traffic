@@ -5,6 +5,7 @@ import os
 import uuid
 import shutil
 import time
+import hashlib
 
 
 def guid():
@@ -19,3 +20,8 @@ def rmdir(dir):
 def now():
     # 返回当前时间
     return time.strftime('%Y-%m-%d %X', time.localtime(time.time()))
+
+
+def filesha256(path):
+    with open(path, 'rb') as fh:
+        return hashlib.sha256(fh.read()).hexdigest()

@@ -89,36 +89,33 @@ if __name__ == '__main__':
                 continue
             if i == "alerts.txt":
                 continue
+            '''
             h = HttpParser()
             h.parse(open(os.path.join("tcpflow", i), "rb").read())
             # print(h.headers)
             if h.type == 2:
                 # response
                 continue
-            try:
-                src, dst = i.split("-")
-            except Exception as e:
-                print(e)
-                print(i)
+            '''
+            cnt = open(os.path.join("tcpflow", i), "rb").read()
+            if cnt.startswith("HTTP"):
+                continue
+            ret = i.split("-")
+            if len(ret) > 1:
+                src = ret[0]
+                dst = ret[1]
+            else:
                 continue
             srcip = ".".join(map(lambda i: str(int(i)), src.split(".")[:4]))
             srcport = int(src.split(".")[-1])
             dstip = ".".join(map(lambda i: str(int(i)), dst.split(".")[:4]))
             dstport = int(dst.split(".")[-1])
             comment = "QWB.pcap"
-            tests = []
-            if "user-agent" in h.headers:
-                tests.append(["ua", h.headers["user-agent"][1]])
-            tests.append(["url", h.url.path])
-            tests.append(["*", h.url.query])
-            tests.append(["*", h.body])
-            tests.append(["*", h.build_all_header()])
-            for t in tests:
-                ret = HTTPIDS.match(t[0], t[1])
-                if ret:
-                    Traffic.add(
-                        dstport, srcport, srcip, dstip,
-                        ret.threat, ret.severity, "HTTP",
-                        now(), ret.reference, comment
-                    )
-                    continue
+            ret = HTTPIDS.match("*", cnt)
+            if ret:
+                Traffic.add(
+                    dstport, srcport, srcip, dstip,
+                    ret.threat, ret.severity, "HTTP",
+                    now(), ret.reference, comment
+                )
+                continue
