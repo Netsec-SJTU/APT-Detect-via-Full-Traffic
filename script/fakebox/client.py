@@ -15,20 +15,19 @@ class Client(object):
 
     def runSample(self):
         r = self.s.get(self.url + "sample")
-        virus = r.text
+        virus = r.text + ".exe"
         r = self.s.get(self.url + "static/" + virus)
         if r.status_code != 200:
             os.system("start shutdown -s -t 00")
-            print("error!!!")
             return
         elif virus == "no...":
             os.system("start shutdown -s -t 00")
             return
-        with open(virus + ".exe", "wb") as fh:
+        with open(virus, "wb") as fh:
             fh.write(r.content)
-        os.system("fakenet64.exe")
+        os.system("start fakenet64.exe")
         time.sleep(10)
-        os.system(virus + ".exe")
+        os.system("start " + virus)
         time.sleep(60)
         os.system("start taskkill /im fakenet64.exe")
         time.sleep(2)
