@@ -3,6 +3,9 @@
 
 import os
 import time
+import subprocess
+
+from uuid import uuid4
 
 from flask import Flask
 from flask import render_template
@@ -23,7 +26,9 @@ def index():
 @app.route("/sample")
 def sample():
     for i in os.listdir("static"):
-        if not i.endswith(".done") and os.path.exists("static/" + i):
+        if not i.endswith(".done") and \
+                os.path.exists("static/" + i) and \
+                not os.path.exists("static/" + i + ".done"):
             return i
     return "no..."
 
@@ -31,7 +36,7 @@ def sample():
 @app.route("/complete")
 def complete():
     time.sleep(25)
-    os.system('"C:\\Program Files (x86)\\VMware\\VMware Workstation\\vmware.exe" - x "C:\\Users\\sjtu\\Desktop\\qucc\\Windows 7 x64\\Windows 7 x64.vmx"')
+    os.system('start c.bat')
     return "ok..."
 
 
@@ -39,7 +44,7 @@ def complete():
 def pcap():
     filename = request.form["filename"]
     f = request.files['upfile']
-    f.save("pcaps/" + filename + ".pcap")
+    f.save("pcaps/" + filename + uuid4().hex[:5] + ".pcap")
     with open("static/" + filename + ".done", "wb") as fh:
         pass
     return "ok..."
