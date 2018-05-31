@@ -46,14 +46,21 @@ def choiceMime(mtype=[]):
         })
     if "exe" in mtype or "all" in mtype:
         ret.update({
-            # exe
+            "application/x-dosexec" : "exe"
             # elf
         })
     if "bin" in mtype or "all" in mtype:
         ret.update({
             "application/octet-stream": "bin"
         })
-
+    if "pdf" in mtype or "all" in mtype:
+        ret.update({
+            "application/pdf": "pdf"
+        })
+    if "swf" in mtype or "all" in mtype:
+        ret.update({
+            "application/x-shockwave-flash": "pdf"
+        })
     return ret
 
 
