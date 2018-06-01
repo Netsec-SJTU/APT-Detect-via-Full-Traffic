@@ -3,6 +3,7 @@
 
 import os
 import time
+import magic
 
 
 def choiceMime(mtype=[]):

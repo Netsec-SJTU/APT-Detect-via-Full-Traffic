@@ -22,6 +22,7 @@
 
 - 读入pcap
     - 访问频率统计
+        - (time, srcip, dstip) to DB
     - tcp重组包
         - http解析
             - tcpflow
@@ -29,12 +30,18 @@
             - tcpflow
         - ftp解析
             - tcpflow
+        - log tcp流
+            - IoC匹配
     - udp包
         - dns解析
             - dns特征扩展
+            - log dns
+            - IoC匹配
     - 文件提取
         - elf沙箱执行
+            cuckoo
         - 其他文件提取特征
+        - IoC匹配
 
 - 数据库写什么
     - 被发现的traffic

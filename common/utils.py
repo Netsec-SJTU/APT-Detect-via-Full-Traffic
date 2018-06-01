@@ -5,6 +5,7 @@ import os
 import uuid
 import shutil
 import time
+import math
 import hashlib
 
 
@@ -25,3 +26,17 @@ def now():
 def filesha256(path):
     with open(path, 'rb') as fh:
         return hashlib.sha256(fh.read()).hexdigest()
+
+
+def entropy(x):
+    '''calc entropy with a given list
+    '''
+    if isinstance(x, str):
+        x = list(x)
+        xlen = float(len(x))
+        sets = set(x)
+        ret = []
+        for i in sets:
+            ret.append(x.count(i) / xlen)
+        x = ret
+    return sum(map(lambda i: - i*math.log(i, 2), x))
