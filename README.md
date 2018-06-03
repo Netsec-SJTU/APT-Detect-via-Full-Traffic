@@ -2,7 +2,7 @@
 
 该repo主要用于存储项目相关代码，目录结构如下
 
-- common
+- common 常用库
 - document 必要的说明文档
 - ml
     - Fwaf
