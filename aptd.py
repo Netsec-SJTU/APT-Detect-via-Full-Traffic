@@ -55,6 +55,7 @@ if __name__ == '__main__':
         removes = [
             "extract_files",
             "extract",
+            "tcpflow",
         ]
         for r in removes:
             rmdir(r)
