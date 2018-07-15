@@ -98,6 +98,5 @@ CREATE TABLE `freq` (
     `time` TIMESTAMP
 );
 
-
--- CREATE USER 'aptd'@'localhost' IDENTIFIED BY 'random_password';
+CREATE USER 'aptd'@'localhost' IDENTIFIED BY 'random_password';
 GRANT all privileges ON aptd.* TO 'aptd'@'localhost';

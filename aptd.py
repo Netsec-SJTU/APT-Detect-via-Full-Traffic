@@ -43,7 +43,7 @@ def interactive(self):
             dst = raw_input("(dst) >>> ")
 
 
-if __name__ == '__main__':
+def old():
     if len(sys.argv) < 2:
         printHelp()
     elif sys.argv[1] == "e":
@@ -120,3 +120,9 @@ if __name__ == '__main__':
                     now(), ret.reference, comment
                 )
                 continue
+
+def main():
+    pass
+
+if __name__ == '__main__':
+    main()
