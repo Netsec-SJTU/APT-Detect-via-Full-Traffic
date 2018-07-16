@@ -121,8 +121,10 @@ def old():
                 )
                 continue
 
+
 def main():
-    pass
+    bro(sys.argv[1])
+
 
 if __name__ == '__main__':
     main()

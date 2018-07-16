@@ -10,7 +10,9 @@ class Paths(object):
         op.dirname(op.abspath(__file__))
     )
     yaraRulePath = "/home/ubuntu/yara/rules/index.yar"
-    broScriptPath = "/home/ubuntu/bro/scripts/policy/frameworks/files/extract-all-files.bro"
+    broScriptPath = "/home/ubuntu/bro/scripts"
+    extractFileScript = broScriptPath + "/policy/frameworks/files/extract-all-files.bro"
+    fileHashScript = broScriptPath + "/base/files/hash/main.bro"
 
 
 if __name__ == '__main__':
