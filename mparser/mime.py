@@ -47,7 +47,7 @@ def choiceMime(mtype=[]):
         })
     if "exe" in mtype or "all" in mtype:
         ret.update({
-            "application/x-dosexec" : "exe"
+            "application/x-dosexec": "exe"
             # elf
         })
     if "bin" in mtype or "all" in mtype:
@@ -83,4 +83,4 @@ def logmimes():
     mimes = sorted(list(mimes))
     with open("mimes.log", "w") as w:
         for m in mimes:
-            w.write(m+"\n")
+            w.write(m + "\n")

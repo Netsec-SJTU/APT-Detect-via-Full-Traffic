@@ -1,24 +1,29 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-
+import os
 import sys
+import time
+import datetime
 
 from common.core import initDB
 from common.utils import rmdir
 from common.utils import now
 
+'''
 from mparser.bro import *
 from mparser.yara import *
 from mparser.tcpflow import tcpflow
 from mparser.mime import *
 from mparser.http import HttpParser
+'''
 
 from Trafficker.packets.pcap import Pcap
 from Trafficker.handlers.tcp import tcpHandler
 
 from schema.tables.httpids import HTTPIDS
 from schema.tables.traffic import Traffic
+from schema.tables.malware import Malware
 from schema.tables.ipids import IPIDS
 from schema.tables.domainids import DomainIDS
 from schema.tables.fileids import FileIDS
@@ -126,11 +131,61 @@ def old():
 
 
 def main():
-    ids = bro(sys.argv[1])
-    db = initDB()
-    for ip in ids['ip']:
-        if IPIDS.getByIP(ip):
-            Traffic.add()
+    bro(sys.argv[1])
+    maldomains = DomainIDS.getAllWithKey()
+    malips = IPIDS.getAllWithKey()
+    malfiles = FileIDS.getAllWithKey()
+    os.chdir("pcap")
+    if os.path.exists("conn.log"):
+        with open("conn.log") as fh:
+            for i in fh:
+                if i.startswith("#"):
+                    continue
+                i = i.split("\t")
+                srcip = i[2]
+                dstip = i[4]
+                if srcip not in malips:
+                    if dstip not in malips:
+                        continue
+                    else:
+                        reference = malips[dstip]
+                else:
+                    reference = malips[srcip]
+                srcport = i[3]
+                dstport = i[5]
+                if i[7] == "-":
+                    # tcp / udp
+                    proto = i[6]
+                else:
+                    # http / dns
+                    proto = i[7]
+                Traffic.add(dstport, srcport, srcip, dstip,
+                            "Mal IP", "HIGH", proto,
+                            datetime.datetime(*time.localtime(float(i[0]))[:6]),
+                            reference, "")
+    if os.path.exists("dns.log"):
+        with open("dns.log") as fh:
+            for i in fh:
+                if i.startswith("#"):
+                    continue
+                i = i.split("\t")
+                if i[9] in maldomains:
+                    Traffic.add(i[5], i[3], i[2], i[4],
+                                "Mal Domain", "HIGH", "DNS",
+                                datetime.datetime(*time.localtime(float(i[0]))[:6]),
+                                maldomains[i[9]], i[9])
+    if os.path.exists("files.log"):
+        with open("files.log") as fh:
+            for i in fh:
+                if i.startswith("#"):
+                    continue
+                i = i.split("\t")
+                md5 = i[19]
+                sha1 = i[20]
+                print(i[9])
+                if md5 in malfiles:
+                    Malware.add(i[9], datetime.datetime(*time.localtime(float(i[0]))[:6]),
+                                malfiles[md5].mtype, malfiles[md5].severity, malfiles[md5].reference, "comment")
 
 
 if __name__ == '__main__':

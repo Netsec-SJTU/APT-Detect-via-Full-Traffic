@@ -24,14 +24,13 @@ class FileIDS(BaseTable):
 
     @classmethod
     def add(cls, mtype, md5, sha1, severity, reference):
-        h = FileIDS()
-        h.mtype = mtype
-        h.value = value
-        h.md5 = md5
-        h.sha1 = sha1
-        h.severity = severity
-        h.reference = reference
-        cls.db.add(h)
+        o = FileIDS()
+        o.mtype = mtype
+        o.md5 = md5
+        o.sha1 = sha1
+        o.severity = severity
+        o.reference = reference
+        cls.db.add(o)
         cls.db.commit()
         return True
 
@@ -58,3 +57,10 @@ class FileIDS(BaseTable):
             return None
         else:
             return obj.one()
+
+    @classmethod
+    def getAllWithKey(cls):
+        ret = {}
+        for i in cls.db.query(cls).all():
+            ret[i.md5] = i
+        return ret

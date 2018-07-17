@@ -35,11 +35,7 @@ class BaseTable(object):
 
     @classmethod
     def get(cls, uid):
-        obj = cls.db.query(cls).filter(cls.uid == uid)
-        if obj.count() < 1:
-            return None
-        else:
-            return obj.one()
+        return cls.db.query(cls).filter(cls.uid == uid).scalar()
 
     @classmethod
     def delete(cls, uid):

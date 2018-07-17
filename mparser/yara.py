@@ -6,7 +6,7 @@ import subprocess
 
 from common.path import Paths
 from common.utils import filesha256
-from schema.tables.fileids import FILEIDS
+from schema.tables.fileids import FileIDS
 
 
 def yara(target, rulepath=Paths.yaraRulePath):

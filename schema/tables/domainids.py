@@ -35,3 +35,15 @@ class DomainIDS(BaseTable):
             return None
         else:
             return obj.one()
+
+    @classmethod
+    def getAllDomains(cls):
+        obj = cls.db.query(cls.domain).all()
+        return map(lambda i: i[0], obj)
+
+    @classmethod
+    def getAllWithKey(cls):
+        ret = {}
+        for i in cls.db.query(cls).all():
+            ret[i.domain] = i.reference
+        return ret

@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# import os
-# import sys
-# sys.path.append(os.path.join("..", ".."))
+import os
+import sys
+sys.path.append(os.path.join("..", ".."))
 
 from common.utils import now
 from schema.tables.malware import Malware

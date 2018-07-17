@@ -29,9 +29,16 @@ class IPIDS(BaseTable):
         return True
 
     @classmethod
-    def getByIP(cls, domain):
-        obj = cls.db.query(cls).filter(cls.domain == domain)
+    def getByIP(cls, ip):
+        obj = cls.db.query(cls).filter(cls.ip == ip)
         if obj.count() < 1:
             return None
         else:
             return obj.one()
+
+    @classmethod
+    def getAllWithKey(cls):
+        ret = {}
+        for i in cls.db.query(cls).all():
+            ret[i.ip] = i.reference
+        return ret

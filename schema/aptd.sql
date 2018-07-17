@@ -21,7 +21,6 @@ CREATE TABLE `traffic` (
 
 CREATE TABLE `malware` (
     `uid` VARCHAR(32) NOT NULL,
-    `sha256` VARCHAR(64) NOT NULL,
     `filename` VARCHAR(100) NOT NULL,
     `time` TIMESTAMP,
     `mtype` VARCHAR(20) NOT NULL,
@@ -114,5 +113,5 @@ CREATE TABLE `freq` (
     `time` TIMESTAMP
 );
 
-CREATE USER 'aptd'@'localhost' IDENTIFIED BY 'random_password';
-GRANT all privileges ON aptd.* TO 'aptd'@'localhost';
+-- CREATE USER 'aptd'@'localhost' IDENTIFIED BY 'random_password';
+-- GRANT all privileges ON aptd.* TO 'aptd'@'localhost';
