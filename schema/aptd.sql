@@ -80,10 +80,26 @@ CREATE TABLE `httpids` (
     `reference` VARCHAR(100) NOT NULL
 );
 
+CREATE TABLE `ipids` (
+    `uid` VARCHAR(32) NOT NULL,
+    `ip` VARCHAR(100) NOT NULL,
+    `reference` VARCHAR(100) NOT NULL
+    -- refer to how to make sure that
+);
+
+CREATE TABLE `domainids` (
+    `uid` VARCHAR(32) NOT NULL,
+    `domain` VARCHAR(100) NOT NULL,
+    `reference` VARCHAR(100) NOT NULL
+    -- refer to how to make sure that
+);
+
 CREATE TABLE `fileids` (
     `uid` VARCHAR(32) NOT NULL,
     `mtype` VARCHAR(20) NOT NULL,
     -- malware type
+    `md5` VARCHAR(32) NOT NULL,
+    `sha1` VARCHAR(40) NOT NULL,
     `severity` VARCHAR(10) NOT NULL,
     `reference` VARCHAR(100) NOT NULL
     -- refer to how to make sure that

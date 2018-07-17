@@ -19,6 +19,9 @@ from Trafficker.handlers.tcp import tcpHandler
 
 from schema.tables.httpids import HTTPIDS
 from schema.tables.traffic import Traffic
+from schema.tables.ipids import IPIDS
+from schema.tables.domainids import DomainIDS
+from schema.tables.fileids import FileIDS
 
 
 def printHelp():
@@ -123,7 +126,11 @@ def old():
 
 
 def main():
-    bro(sys.argv[1])
+    ids = bro(sys.argv[1])
+    db = initDB()
+    for ip in ids['ip']:
+        if IPIDS.getByIP(ip):
+            Traffic.add()
 
 
 if __name__ == '__main__':
